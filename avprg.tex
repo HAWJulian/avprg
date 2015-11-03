@@ -20,17 +20,24 @@
 \begin{abstract}
 Ein Abakus ist ein mechanisches Rechenhilfsmittel, welches Kugeln, oft aus Holz oder Glas, verwendet, die auf einer horizontalen Strecke verschoben werden können. Je nach Ausführung wird auch die Bezeichnung Zählrahmen verwendet.
 
-In unserem Projekt soll ein Abakus zur Steuerung eines Interfaces verwendet werden.
+In unserem Projekt soll ein Abakus zur Steuerung von Software und Audiosignalen verwendet werden.
 \end{abstract}
 \section{Beschreibung aus Nutzersicht}
 %nutzer verschiebt kugeln auf abakus
+%je eine reihe abbildung eines schiebereglers zum steuern eines bestimmten parameters
 %verschiebt werte auf virtuellem interface -> tangable schieberegler
+%controller für sound erzeugungsprogramm (midicontroller)
 Ein Nutzer soll an einem Abakus ähnelndem Objekt farbige Kugeln auf vertikal übereinander angeordneten Stangen frei bewegen können. Je eine Kugel beschreibt in Relation zu ihrer Position auf der jeweiligen Stange einen Wert. Dieser Wert soll anschließend an eine Schnittstelle weitergeleitet werden, damit mit den Kugeln ein Interface gesteuert werden kann. Jede Kugel stellt somit eine Art \glqq tangable Schieberegler\grqq dar.
 
 
 \section{Technisches Konzept}
+%abakus ähnliches konstrukt wird erstellt (lackierte holzkugeln verschiebbar auf metallstangen o.ä.)
 %farbige kugeln übereinander angeordnet
 %gut beleuchtet, weißer hintergrund
+%kamera erfasst kugeln
+%erfassung der positionen durch opencv
+%auswertung der werte -> ggf skalierung wie in oscillator projekt
+%weiterleitung an software (zb oscillator) / senden eines midi wertes
 Jede auf dem Abakus befindliche farbige Kugel wird von einer Kamera erfasst, die sich unmittelbar vor dem Abakus positioniert wird. Die Einzelbilder werden in einem Analyseprogramm mit Hilfe der Programmbibliothek \glqq OpenCV\grqq ausgewertet. Hier findet die Objekterkennung der Kugeln anhand ihrer Farbe statt. Wichtig für die Farben der Kugeln ist, dass die Farben zweier vertikal benachbarten Kugeln möglichst unterschiedlich sind. Unterschiedliche Farben bedeutet hier, dass (?). Mit dem horizontalen Bewegen einer Kugel von links nach rechts soll ein Wert von 0\% bis 100\% eingestellt werden können. Dieser Wert wird aus der ermittelten Position der Kugel generiert und wird anschließend entweder über einen korrespondierenden MIDI-Wert an eine DAW geschickt oder direkt an die variablen Einstellungsmöglichkeiten des Synthesizers aus der AVPRG Vorlesung weitergeleitet.
 
 
