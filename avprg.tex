@@ -27,6 +27,10 @@ In unserem Projekt soll ein Abakus zur Steuerung von Software und Audiosignalen 
 %je eine reihe abbildung eines schiebereglers zum steuern eines bestimmten parameters
 %verschiebt werte auf virtuellem interface -> tangable schieberegler
 %controller für sound erzeugungsprogramm (midicontroller)
+%Bild Versuchsaufbau
+%
+Ein Nutzer kann an einer Art Abakus kleine Holzkugeln verschieben. Jede Reihe stellt dabei einen eigenen Parameter dar, wobei die Kugel als Art \glqq tangable Schieberegler\grqq  fungiert. Durch das verschieben der Holzkugeln werden die Werte des Interfaces verändert -- so entsteht aus dem Abakus ein kleiner Midicontroller.
+%
 Ein Nutzer soll an einem Abakus ähnelndem Objekt farbige Kugeln auf vertikal übereinander angeordneten Stangen frei bewegen können. Je eine Kugel beschreibt in Relation zu ihrer Position auf der jeweiligen Stange einen Wert. Dieser Wert soll anschließend an eine Schnittstelle weitergeleitet werden, damit mit den Kugeln ein Interface gesteuert werden kann. Jede Kugel stellt somit eine Art \glqq tangable Schieberegler\grqq dar.
 
 
@@ -35,10 +39,12 @@ Ein Nutzer soll an einem Abakus ähnelndem Objekt farbige Kugeln auf vertikal ü
 %farbige kugeln übereinander angeordnet
 %gut beleuchtet, weißer hintergrund
 %kamera erfasst kugeln
-%erfassung der positionen durch opencv
+%erfassung der positionen durch opencv (filterung der signale)
 %auswertung der werte -> ggf skalierung wie in oscillator projekt
 %weiterleitung an software (zb oscillator) / senden eines midi wertes
-Jede auf dem Abakus befindliche farbige Kugel wird von einer Kamera erfasst, die sich unmittelbar vor dem Abakus positioniert wird. Die Einzelbilder werden in einem Analyseprogramm mit Hilfe der Programmbibliothek \glqq OpenCV\grqq ausgewertet. Hier findet die Objekterkennung der Kugeln anhand ihrer Farbe statt. Wichtig für die Farben der Kugeln ist, dass die Farben zweier vertikal benachbarten Kugeln möglichst unterschiedlich sind. Unterschiedliche Farben bedeutet hier, dass (?). Mit dem horizontalen Bewegen einer Kugel von links nach rechts soll ein Wert von 0\% bis 100\% eingestellt werden können. Dieser Wert wird aus der ermittelten Position der Kugel generiert und wird anschließend entweder über einen korrespondierenden MIDI-Wert an eine DAW geschickt oder direkt an die variablen Einstellungsmöglichkeiten des Synthesizers aus der AVPRG Vorlesung weitergeleitet.
+
+%bau eines abakus
+Jede auf dem Abakus befindliche farbige Kugel wird von einer Kamera erfasst, die sich unmittelbar vor dem Abakus positioniert wird. Der Abakus wird dabei gut beleuchtet, damit die Kamera möglichst kontrastreiche Bilddaten erhält. Um weitere Fehlerquellen zu vermeiden wird der von der Kamera erfasste Bereich einfarbig Verklediet (Karton, Papier, Pappe o.ä.), damit die Farberkennung außerhalb des gewünschten Bereiches reduziert wird (Erkennung der Farbe(n) der Kugeln in der Umgebung vermeiden). Die von der Kamera aufgezeichneten Einzelbilder werden in einem Analyseprogramm mit Hilfe der Programmbibliothek \glqq OpenCV\grqq ausgewertet. Hier findet die Objekterkennung der Kugeln anhand ihrer Farbe statt. Wie bei einem Schieberegler bestimmt die Position des \glqq Schiebeelements\grqq den Wert des jeweiligen Reglers. Jede Reihe beschreibt dabei den Wert eine bestimmten Variable. Mit dem horizontalen Bewegen einer Kugel von links nach rechts soll dieser Wert von 0\% bis 100\% eingestellt werden können. Abhängig von der Variable, die mit dem Regler angesteuert werden soll, wird dieser wert auf einen bestimmten Wertebereich abgeblidet und/oder skaliert. Dieser Wert wird aus der ermittelten Position der Kugel generiert und wird anschließend entweder über einen korrespondierenden MIDI-Wert an eine DAW geschickt oder direkt an die variablen Einstellungsmöglichkeiten des Synthesizers aus der AVPRG Vorlesung weitergeleitet.
 
 
 
