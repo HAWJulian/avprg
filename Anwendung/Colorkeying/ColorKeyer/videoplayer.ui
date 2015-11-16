@@ -141,7 +141,7 @@
    <widget class="QSlider" name="HueMax">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>470</x>
       <y>460</y>
       <width>160</width>
       <height>19</height>
@@ -160,7 +160,7 @@
    <widget class="QSlider" name="SatMax">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>470</x>
       <y>500</y>
       <width>160</width>
       <height>19</height>
@@ -179,7 +179,7 @@
    <widget class="QSlider" name="ValueMax">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>470</x>
       <y>540</y>
       <width>160</width>
       <height>19</height>
@@ -211,7 +211,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>520</x>
       <y>430</y>
       <width>47</width>
       <height>13</height>
@@ -258,6 +258,84 @@
     </property>
     <property name="text">
      <string>Value</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="hueminlabel">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>460</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="saturationminlabel">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>500</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valueminlabel">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>540</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="huemaxlabel">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>460</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valuemaxlabel">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>540</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="saturationmaxlabel">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>500</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>

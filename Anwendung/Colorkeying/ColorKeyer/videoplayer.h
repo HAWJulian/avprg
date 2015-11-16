@@ -39,6 +39,7 @@ private:
     VideoEngine *videoThread;
     ColorKeyer* colorKeyer;
     void callSliderchange();
+    void setAllLabels();
 };
 
 #endif // VIDEOPLAYER_H
