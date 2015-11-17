@@ -14,6 +14,8 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     callSliderchange();
     setAllLabels();
+    colorKeyer->setAmountOfObejects(ui->objectsslider->value());
+    colorKeyer->setSizeOfObject(ui->pixelslider->value());
 }
 
 VideoPlayer::~VideoPlayer()
@@ -33,9 +35,11 @@ void VideoPlayer::on_playButton_clicked()
 void VideoPlayer::on_openVideoFileButton_clicked()
 {
     // Kamera
+
     videoThread->openCamera();
     videoThread->start();
     return;
+
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
 
@@ -59,6 +63,8 @@ void VideoPlayer::setAllLabels()
     ui->huemaxlabel->setText(QString::number((int)ui->HueMax->value()*2) + "°");
     ui->saturationmaxlabel->setText(QString::number((int)round(ui->SatMax->value()/2.55)) + "%");
     ui->valuemaxlabel->setText(QString::number((int)round(ui->ValueMax->value()/2.55))+ "%");
+    ui->objectslabel->setText(QString::number((int)ui->objectsslider->value()));
+    ui->pixellabel->setText(QString::number((int)ui->pixelslider->value()));
 }
 
 void VideoPlayer::on_HueMin_valueChanged(int value)
@@ -95,4 +101,16 @@ void VideoPlayer::on_ValueMax_valueChanged(int value)
 {
     callSliderchange();
     ui->valuemaxlabel->setText(QString::number((int)round(value/2.55))+"%");
+}
+
+void VideoPlayer::on_pixelslider_valueChanged(int value)
+{
+    colorKeyer->setSizeOfObject(value);
+    ui->pixellabel->setText(QString::number(value));
+}
+
+void VideoPlayer::on_objectsslider_valueChanged(int value)
+{
+    colorKeyer->setAmountOfObejects(value);
+    ui->objectslabel->setText(QString::number(value));
 }

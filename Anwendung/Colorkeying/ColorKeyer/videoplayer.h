@@ -34,6 +34,10 @@ private slots:
 
     void on_ValueMax_valueChanged(int value);
 
+    void on_pixelslider_valueChanged(int value);
+
+    void on_objectsslider_valueChanged(int value);
+
 private:
     Ui::VideoPlayer *ui;
     VideoEngine *videoThread;
