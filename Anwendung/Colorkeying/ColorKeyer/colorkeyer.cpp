@@ -46,10 +46,10 @@ Mat ColorKeyer::maskColor(const Mat &input){
     Mat output(input.rows, input.cols, CV_8UC1);
     //run over all pixels in the given frame
     inRange(input, Scalar(minH, minS, minV), Scalar(maxH, maxS, maxV), output);
-    int y = 0;
-    int x = 0;
+    //int y = 0;
+    //int x = 0;
     medianBlur(input, input, 11);
-    Vec3b inputPixel = input.at<Vec3b>(y,x);
+    //Vec3b inputPixel = input.at<Vec3b>(y,x);
     /*
     for(int x = 0; x < input.cols; x++){
         for(int y = 0; y < input.rows; y++){
@@ -87,6 +87,8 @@ Mat ColorKeyer::process(const Mat &input){
     std::vector<std::vector<cv::Point> > contours;
     //vorbereiten des result objektes
     std::vector<std::vector<Point> > results;
+    std::vector<Point> centers;
+    std::vector<Point> centers_sorted;
     //duplizieren des output mats
     cv::Mat contourOutput = output.clone();
     //finden der konturen (Simple/none)
@@ -104,6 +106,7 @@ Mat ColorKeyer::process(const Mat &input){
         }
     }
     Mat newoutput = output.clone();
+    //kopiert output in newoutput und convertiert es zurück in rgb
     cvtColor(output, newoutput, CV_GRAY2RGB);
 
     qDebug() << results.size();
@@ -117,8 +120,10 @@ Mat ColorKeyer::process(const Mat &input){
             Moments mu =  moments(contours[i], false);
             //berechne den schwerpunkt
             Point mc(mu.m10/mu.m00, mu.m01/mu.m00);
+            centers.push_back(mc);
             qDebug() << mc.x << mc.y;
-            if(mc.x > 5 && mc.x <output.cols && mc.y > 5 && mc.y < output.rows)
+            //zeichene rotes quadrat in die mitte eines erkannten objektes
+            if(mc.x > 10 && mc.x <output.cols-9 && mc.y > 10 && mc.y < output.rows-9)
             {
                 for(int a = mc.y-9; a<mc.y+10; a++)
                 {
@@ -130,12 +135,41 @@ Mat ColorKeyer::process(const Mat &input){
                     }
                 }
             }
-            //makiere schwerpunkt durch schwarzes viereck
-            /*
-
-            */
 
         }
+        //sortieren
+
+
+
+        unsigned int min;
+        for(unsigned int c = 0; c < centers.size() - 1; c++)
+        {
+            min = c;
+            //qDebug() << min;
+            for(unsigned int d = c+1; d < centers.size(); d++)
+            {
+                if(centers[d].y < centers[min].y)
+                {
+                    min = d;
+                }
+                //qDebug() << "inner min";
+                //qDebug() << min;
+            }
+            if(min != c)
+            {
+                qDebug() << "swap " << min << " and " << c;
+                Point temp = centers[c];
+                centers[c] = centers[min];
+                centers[min] = temp;
+            }
+        }
+        //
+        qDebug() << "sorted";
+        for(unsigned int c = 0; c < centers.size(); c++)
+        {
+            qDebug() << centers[c].x << centers[c].y;
+        }
+
     }
     return newoutput;
 }
