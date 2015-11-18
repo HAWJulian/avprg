@@ -22,6 +22,7 @@ private:
     double maxV;
     unsigned int amountPixels;
     unsigned int amountObjects;
+    std::vector<cv::Point> sortCenters(std::vector<cv::Point> centers);
 };
 
 #endif // COLORKEYER_H

@@ -137,41 +137,42 @@ Mat ColorKeyer::process(const Mat &input){
             }
 
         }
-        //sortieren
-
-
-
-        unsigned int min;
-        for(unsigned int c = 0; c < centers.size() - 1; c++)
-        {
-            min = c;
-            //qDebug() << min;
-            for(unsigned int d = c+1; d < centers.size(); d++)
-            {
-                if(centers[d].y < centers[min].y)
-                {
-                    min = d;
-                }
-                //qDebug() << "inner min";
-                //qDebug() << min;
-            }
-            if(min != c)
-            {
-                qDebug() << "swap " << min << " and " << c;
-                Point temp = centers[c];
-                centers[c] = centers[min];
-                centers[min] = temp;
-            }
-        }
-        //
-        qDebug() << "sorted";
-        for(unsigned int c = 0; c < centers.size(); c++)
-        {
-            qDebug() << centers[c].x << centers[c].y;
-        }
-
+        centers = sortCenters(centers);
     }
     return newoutput;
+}
+//sortiert einen vector von points aufsteigend nach ihrem y wert
+std::vector<Point> ColorKeyer::sortCenters(std::vector<Point> centers)
+{
+    unsigned int min;
+    for(unsigned int c = 0; c < centers.size() - 1; c++)
+    {
+        min = c;
+        //qDebug() << min;
+        for(unsigned int d = c+1; d < centers.size(); d++)
+        {
+            if(centers[d].y < centers[min].y)
+            {
+                min = d;
+            }
+            //qDebug() << "inner min";
+            //qDebug() << min;
+        }
+        if(min != c)
+        {
+            //qDebug() << "swap " << min << " and " << c;
+            Point temp = centers[c];
+            centers[c] = centers[min];
+            centers[min] = temp;
+        }
+    }
+    //
+    qDebug() << "sorted";
+    for(unsigned int c = 0; c < centers.size(); c++)
+    {
+        qDebug() << centers[c].x << centers[c].y;
+    }
+    return centers;
 }
 
 
