@@ -189,15 +189,7 @@ Mat ColorKeyer::process(const Mat &input){
         {
             for(int a = 0; a < newoutput.cols; a++)
             {
-                //qDebug() << yValues[v] - variance;
-                //qDebug() << a;
                 //top
-                if(a == 0)
-                {
-                    qDebug() << v;
-                    qDebug() << yValues[v] - variance;
-                    qDebug() << yValues[v] + variance;
-                }
                 newoutput.at<Vec3b>(yValues[v] - variance, a)[0] = 255;
                 newoutput.at<Vec3b>(yValues[v] - variance, a)[1] = 0;
                 newoutput.at<Vec3b>(yValues[v] - variance, a)[2] = 0;
@@ -210,6 +202,7 @@ Mat ColorKeyer::process(const Mat &input){
     }
     if(checkBorders(centers))
     {
+        qDebug() << "values ok";
         //TODO verarbeitung der werte
     }
     return newoutput;
@@ -238,7 +231,7 @@ std::vector<Point> ColorKeyer::sortCenters(std::vector<Point> centers)
     //
     for(unsigned int c = 0; c < centers.size(); c++)
     {
-        //qDebug() << centers[c].x << centers[c].y;
+        qDebug() << centers[c].x << centers[c].y;
     }
     return centers;
 }
