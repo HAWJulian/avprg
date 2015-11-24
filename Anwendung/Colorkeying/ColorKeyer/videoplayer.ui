@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1389</width>
+    <width>1363</width>
     <height>1020</height>
    </rect>
   </property>
@@ -68,10 +68,10 @@
    <widget class="VideoWidget" name="processedFrame">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>470</x>
       <y>30</y>
-      <width>411</width>
-      <height>291</height>
+      <width>641</width>
+      <height>481</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -456,26 +456,110 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="VideoWidget" name="markerFrame">
+   <widget class="QPushButton" name="yaxisbutton">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>340</y>
-      <width>411</width>
-      <height>301</height>
+      <x>130</x>
+      <y>740</y>
+      <width>101</width>
+      <height>23</height>
      </rect>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
+    <property name="text">
+     <string>Set y-Axis values</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="varianceslider">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>780</y>
+      <width>291</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>780</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>variance in # px</string>
     </property>
-    <property name="scaledContents">
-     <bool>false</bool>
+   </widget>
+   <widget class="QLabel" name="variancelabel">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>780</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="centerscb">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>70</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Centers</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="exactcenterscb">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>110</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Exact Centers</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="linescb">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>150</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lines</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

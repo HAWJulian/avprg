@@ -38,6 +38,16 @@ private slots:
 
     void on_objectsslider_valueChanged(int value);
 
+    void on_varianceslider_valueChanged(int value);
+
+    void on_yaxisbutton_clicked();
+
+    void on_centerscb_clicked();
+
+    void on_exactcenterscb_clicked();
+
+    void on_linescb_clicked();
+
 private:
     Ui::VideoPlayer *ui;
     VideoEngine *videoThread;

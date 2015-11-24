@@ -17,6 +17,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     setAllLabels();
     colorKeyer->setAmountOfObejects(ui->objectsslider->value());
     colorKeyer->setSizeOfObject(ui->pixelslider->value());
+    colorKeyer->setVariance(ui->varianceslider->value());
 }
 
 VideoPlayer::~VideoPlayer()
@@ -66,6 +67,7 @@ void VideoPlayer::setAllLabels()
     ui->valuemaxlabel->setText(QString::number((int)round(ui->ValueMax->value()/2.55))+ "%");
     ui->objectslabel->setText(QString::number((int)ui->objectsslider->value()));
     ui->pixellabel->setText(QString::number((int)ui->pixelslider->value()));
+    ui->variancelabel->setText(QString::number((int)ui->varianceslider->value()));
 }
 
 void VideoPlayer::on_HueMin_valueChanged(int value)
@@ -114,4 +116,30 @@ void VideoPlayer::on_objectsslider_valueChanged(int value)
 {
     colorKeyer->setAmountOfObejects(value);
     ui->objectslabel->setText(QString::number(value));
+}
+
+void VideoPlayer::on_varianceslider_valueChanged(int value)
+{
+    colorKeyer->setVariance(value);
+    ui->variancelabel->setText(QString::number(value));
+}
+
+void VideoPlayer::on_yaxisbutton_clicked()
+{
+    colorKeyer->setYValues();
+}
+
+void VideoPlayer::on_centerscb_clicked()
+{
+    colorKeyer->setPaintCenters();
+}
+
+void VideoPlayer::on_exactcenterscb_clicked()
+{
+    colorKeyer->setPaintExactCenters();
+}
+
+void VideoPlayer::on_linescb_clicked()
+{
+    colorKeyer->setPaintLines();
 }
