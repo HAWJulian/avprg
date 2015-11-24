@@ -75,6 +75,7 @@ void VideoEngine::run()
     while(!stopped)
     {
         cv::Mat cvFrame;
+        cv::Mat cont;
         if (false == videoCapture.grab()){
             qDebug() << "grab() failed";
             break;
@@ -100,10 +101,13 @@ void VideoEngine::run()
         // Process Video Frame
         if (processor != 0){
             cvFrame = processor->process(cvFrame);
+            cont = processor->getCurrentContours();
         }
 
         emit sendProcessedImage(cvMatToQImage(cvFrame));
-
+        emit sendContoursImage(cvMatToQImage(cont));
+        //kallibrierungs marker
+        //konturen
         // check if stopped
         QMutexLocker locker(&mutex);
         if (stopped) {

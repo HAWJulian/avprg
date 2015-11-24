@@ -2,7 +2,7 @@
 #define COLORKEYER_H
 
 #include "videoprocessor.h"
-
+#include "cvmattoqimage.h"
 class ColorKeyer : public VideoProcessor
 {
 public:
@@ -12,6 +12,8 @@ public:
     void setThreshold(double hue,double sat,double val,double huem,double satm,double valm);
     void setSizeOfObject(unsigned int amountPixels);
     void setAmountOfObejects(unsigned int amountObjects);
+    cv::Mat getCurrentContours();
+    cv::Mat contoursret;
 private:
     cv::Mat maskColor(const cv::Mat&source);
     double minH;

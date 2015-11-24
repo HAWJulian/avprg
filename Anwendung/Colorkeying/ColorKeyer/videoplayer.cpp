@@ -12,6 +12,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     videoThread->setProcessor(colorKeyer);
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
+    connect(videoThread, SIGNAL(sendContoursImage(const QImage&)), ui->contoursFrame, SLOT(setImage(const QImage&)));
     callSliderchange();
     setAllLabels();
     colorKeyer->setAmountOfObejects(ui->objectsslider->value());

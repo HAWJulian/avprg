@@ -23,10 +23,12 @@ void ColorKeyer::setThreshold(double hue,double sat,double val,double huem,doubl
     maxS = satm;
     maxV = valm;
 }
+//setzt die groesse eines objektes, das erkannt werden soll, in anzahl der pixel
 void ColorKeyer::setSizeOfObject(unsigned int amountPixels)
 {
     this->amountPixels = amountPixels;
 }
+//setzt die anzahl der objekte, die erkannt werden sollen
 void ColorKeyer::setAmountOfObejects(unsigned int amountObjects)
 {
     this->amountObjects = amountObjects;
@@ -94,6 +96,7 @@ Mat ColorKeyer::process(const Mat &input){
     //finden der konturen (Simple/none)
     //cv::findContours(contourOutput, contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE );
     cv::findContours(contourOutput, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+    contoursret = contourOutput.clone();
     //für jeden eintrag in contours durch findContours
     for(unsigned int x = 0; x<contours.size(); x++)
     {
@@ -173,6 +176,11 @@ std::vector<Point> ColorKeyer::sortCenters(std::vector<Point> centers)
         qDebug() << centers[c].x << centers[c].y;
     }
     return centers;
+}
+//returns ccurrent contours image
+cv::Mat ColorKeyer::getCurrentContours()
+{
+    return contoursret;
 }
 
 
