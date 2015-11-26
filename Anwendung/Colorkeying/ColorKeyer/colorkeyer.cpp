@@ -12,7 +12,9 @@ const int THRESHOLD = 40;
 
 ColorKeyer::ColorKeyer()
 {
+    //variable which checks if new y-axis values should be taken
     setval = false;
+    //holds
     yValues = {};
     paintC = true;
     paintExact = true;
@@ -40,21 +42,22 @@ void ColorKeyer::setThreshold(double hue,double sat,double val,double huem,doubl
     maxS = satm;
     maxV = valm;
 }
-//setzt die groesse eines objektes, das erkannt werden soll, in anzahl der pixel
+//sets the minimum size of an object
 void ColorKeyer::setSizeOfObject(unsigned int amountPixels)
 {
     this->amountPixels = amountPixels;
 }
-//setzt die anzahl der objekte, die erkannt werden sollen
+//sets the amount of objects which should be captured
 void ColorKeyer::setAmountOfObejects(unsigned int amountObjects)
 {
     this->amountObjects = amountObjects;
 }
-//setzt variance, die ein objekt in y richtung haben darf (in beide richtungen)
+//sets the distance which the center of an object may have to its captured y-axis value
 void ColorKeyer::setVariance(unsigned int variance)
 {
     this->variance = variance;
 }
+//sets variable to capture new y-axis values
 void ColorKeyer::setYValues()
 {
     setval = true;
@@ -66,7 +69,7 @@ void ColorKeyer::startProcessing(const VideoFormat& format){
     // Framerate: format.framesPerSecond()
     // Pixelart: format.type() (CV_8UC1=Graustufen, CV_8UC3=BGR)
 }
-
+//takes the input image, filters it and checks for colors in a certain range
 Mat ColorKeyer::maskColor(const Mat &input){
     cvtColor(input, input, CV_BGR2HSV);
     medianBlur(input, input, 11);
@@ -78,13 +81,10 @@ Mat ColorKeyer::maskColor(const Mat &input){
     return output;
 }
 Mat ColorKeyer::process(const Mat &input){
-    //FILTERING
-    //OBJECT LOCATION
     //Maskiertes bild
     Mat output = maskColor(input);
     //Filterung des maskierten Bildes
     erode(output, output, Mat(), Point(-1,-1), 2, 1, 1);
-    //dilate(output, output, Mat());
     dilate(output, output, Mat(),  Point(-1, -1), 2, 1, 1);
     //fastNlMeansDenoising(output, output, 3.0f, 7, 21);
     //definieren der contours matrix (2D vector von Points)
@@ -146,15 +146,15 @@ Mat ColorKeyer::process(const Mat &input){
                 {
                     int x = mc.x-9;
                     //zeichne kreuz zur klaren erkennung des zentrums
-                    for(int a = mc.y-9; a <mc.y+10; a++)
+                    for(int a = mc.y-9; a <mc.y+9; a++)
                     {
                         newoutput.at<Vec3b>(a,x)[0] = 0;
                         newoutput.at<Vec3b>(a,x)[1] = 255;
                         newoutput.at<Vec3b>(a,x)[2] = 0;
                         x++;
                     }
-                    x = mc.x+10;
-                    for(int a = mc.y-9; a <mc.y+10; a++)
+                    x = mc.x+9;
+                    for(int a = mc.y-9; a <mc.y+9; a++)
                     {
                         newoutput.at<Vec3b>(a,x)[0] = 0;
                         newoutput.at<Vec3b>(a,x)[1] = 255;
@@ -202,8 +202,7 @@ Mat ColorKeyer::process(const Mat &input){
     }
     if(checkBorders(centers))
     {
-        qDebug() << "values ok";
-        //TODO verarbeitung der werte
+        setValidValues(centers);
     }
     return newoutput;
 }
@@ -240,7 +239,7 @@ cv::Mat ColorKeyer::getCurrentContours()
 {
     return contoursret;
 }
-//checks if centers are valid
+//checks if centers are valid (correct amount of objects, every center of an object within its defined range)
 bool ColorKeyer::checkBorders(std::vector<Point> centers)
 {
     //if amount of centers dont match the amount of objects which should be deteccted, return false
