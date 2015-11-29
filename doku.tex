@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[round,authoryear]{natbib}
+\usepackage[hyphens]{url}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[]{graphicx}
+\usepackage[all]{hypcap}
+\usepackage{titlepic}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titling}
+%\pagenumbering{gobble}
+\title{Object Tracking}
+\setlength{\droptitle}{-0em}
+\author{Stefan Schäfers (2175460), Julian Roosch (2203745)}
+\begin{document}
+\maketitle
+%Object Tracking in einem Maskierten Bild, Pseudocode, schlechte Laufzeit, optimierung durch methoden die bereits in opencv implementiert sind
+\begin{enumerate}
+\item So lange nicht alle Pixel durchlaufen, das Bild Zeile für Zeile von links nach rechts durchsuchen
+\item Wenn ein Weißes Pixel gefunden wird, schwarz färben; x- und y-Wert des Pixels auf Variablen addieren, Anzahl um eins erhöhen
+\item So lange \glqq unbesuchte\grqq{} Pixel existieren, finde alle Nachbarpixel und wiederhole Schritt 2
+\item Wenn die Anzahl der Pixel eine Mindestgröße überschreitet wurde ein Objekt erkannt
+\item Sonst war es nur Rauschen oder sonstige Fehlerquellen
+\end{enumerate}
+
+\begin{enumerate}
+\item Hole Inputimage von Kamera
+\item Konvertieren des Bildes in den HSV-Farbraum für bessere Thresholds
+\item Anwendung von medianBlur, um Rauschen aus dem Ausgangsbild zu entfernen
+\item Maskieren des Bildes über Thresholds
+\item Anwendung von medianBlur, um Rauschen aus dem maskierten Bild zu entfernen
+\item Anwendung von errode und dillate, um weiteres (weißes) Rauschen zu entfernen und um Objekte zu schließen
+\item Finden der Konturen durch findContours
+\item Anhand der Größe der Rückgabe erkennen, ob die korrekte Anzahl an Objekten mit der gewünschten Größe gefunden werden
+\item Ist dies der Fall, Berechnung der Zentren der Objekte über moments
+\end{enumerate}
+
+\end{document}
