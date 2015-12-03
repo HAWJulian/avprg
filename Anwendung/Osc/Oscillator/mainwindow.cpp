@@ -15,6 +15,63 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     initializeAudio();
     initializeMidi();
+
+
+    // The following plot setup is mostly taken from the plot demos:
+    ui->plot->addGraph();
+    ui->plot->addGraph();
+    ui->plot->graph(0)->setPen(QPen(QColor(60, 220, 170, 255)));
+    ui->plot->graph(1)->setPen(QPen(QColor(60, 220, 170, 255)));
+    ui->plot->graph(0)->setBrush(QBrush(QColor(60, 220, 170, 255)));
+    ui->plot->graph(1)->setBrush(QBrush(QColor(60, 220, 170, 255)));
+
+    int values = 1000;
+    int samplesstep = (granularSynthesis.file.data.size() / values);
+    int sumupinterval = samplesstep/2;
+
+    QVector<double> x(values), y(values), y2(values);
+    for (int i=0; i<values; i++)
+    {
+        x[i] = i;
+
+        int von = i*samplesstep-sumupinterval;
+        if (von < 0) { von = 0; }
+        int bis = i*samplesstep+sumupinterval;
+        if (bis >= granularSynthesis.file.data.size()) { bis = granularSynthesis.file.data.size()-1; }
+
+        for (int k = von; k < bis; k++) {
+            y[i] += ((double) std::abs(granularSynthesis.file.data[k]));
+        }
+
+        y[i] /= sumupinterval;
+        y2[i] = -y[i];
+    }
+
+    ui->plot->graph(0)->setData(x, y);
+    ui->plot->graph(1)->setData(x, y2);
+
+    ui->plot->setBackground(QColor(40, 40, 40));
+
+    ui->plot->xAxis->setVisible(false);
+    ui->plot->yAxis->setVisible(false);
+
+    ui->plot->rescaleAxes();
+    ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
+    ui->horizontalScrollBar->setRange(0, values);
+
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horzScrollBarChanged(int)));
+
+
+}
+
+void MainWindow::horzScrollBarChanged(int value)
+{
+  if (qAbs(ui->plot->xAxis->range().center()-value/100.0) > 0.01) // if user is dragging plot, we don't want to replot twice
+  {
+    ui->plot->xAxis->setRange(value/100.0, ui->plot->xAxis->range().size(), Qt::AlignCenter);
+    ui->plot->replot();
+  }
 }
 
 MainWindow::~MainWindow()
@@ -35,7 +92,7 @@ void MainWindow::initializeAudio(){
     on_dialRelease_valueChanged(ui->dialRelease->value());
     ui->labelRelease->setNum(ui->dialRelease->value());
 
-    audioPlayer.setAudioSource(&oscillatorSource);
+    audioPlayer.setAudioSource(&granularSynthesis);
     audioPlayer.start();
 }
 
@@ -71,17 +128,17 @@ void MainWindow::on_frequencySlider_valueChanged(int value)
     float frequency = pow(10, scaledValue);
 
     ui->frequencyLabel->setText(QString::number((int)frequency));
-    oscillatorSource.setFrequency(frequency);
+    granularSynthesis.setFrequency(frequency);
 }
 
 void MainWindow::on_waveformCombobox_activated(int index)
 {
-    oscillatorSource.setSelectedOscillator(index);
+    granularSynthesis.setSelectedOscillator(index);
 }
 
 void MainWindow::on_gainSlider_valueChanged(int value)
 {
-    oscillatorSource.setGain(value);
+    granularSynthesis.setGain(value);
 }
 
 
@@ -90,145 +147,150 @@ void MainWindow::on_note_1_clicked(bool checked)
     qDebug() << "note 1";
 
     if (checked){
-        oscillatorSource.setNote(60);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(60);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_2_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(61);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(61);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_3_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(62);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(62);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_4_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(63);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(63);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_5_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(64);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(64);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_6_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(65);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(65);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_7_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(66);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(66);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_8_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(67);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(67);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_9_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(68);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(68);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_10_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(69);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(69);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_11_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(70);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(70);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 void MainWindow::on_note_12_clicked(bool checked)
 {
     if (checked){
-        oscillatorSource.setNote(71);
-        oscillatorSource.noteOn();
+        granularSynthesis.setNote(71);
+        granularSynthesis.noteOn();
     }
     else{
-        oscillatorSource.noteOff();
+        granularSynthesis.noteOff();
     }
 }
 
 void MainWindow::on_dialAttack_valueChanged(int value)
 {
-    oscillatorSource.setAttackSeconds(value/100.f);
+    granularSynthesis.setAttackSeconds(value/100.f);
 }
 
 void MainWindow::on_dialDecay_valueChanged(int value)
 {
-    oscillatorSource.setDecaySeconds(value/100.f);
+    granularSynthesis.setDecaySeconds(value/100.f);
 }
 
 void MainWindow::on_dialSustain_valueChanged(int value)
 {
-    oscillatorSource.setSustain_dB(value - 100);
+    granularSynthesis.setSustain_dB(value - 100);
 }
 
 void MainWindow::on_dialRelease_valueChanged(int value)
 {
-    oscillatorSource.setReleaseSeconds(value/100.f);
+    granularSynthesis.setReleaseSeconds(value/100.f);
 }
 
 void MainWindow::on_comboMidiInputBox_activated(const QString &arg1)
 {
 
+}
+
+void MainWindow::on_rateSlider_valueChanged(int value)
+{
+    granularSynthesis.setRate(value);
 }

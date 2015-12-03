@@ -5,8 +5,10 @@
 #include <QFile>
 #include <QAudioOutput>
 #include "audioplayer.h"
-#include "oscillatorsource.h"
+#include "granularsynthesis.h"
 #include "midiinput.h"
+
+#include "qcustomplot/qcustomplot.h"
 
 namespace Ui {
 class MainWindow;
@@ -54,13 +56,18 @@ private slots:
     void onMidiNoteOff(const int chan, const int note, const int vel);
     void onMidiNoteOn(const int chan, const int note, const int vel);
 
+    void horzScrollBarChanged(int value);
+
+    void on_rateSlider_valueChanged(int value);
+
 private:
     void initializeAudio();
     void initializeMidi();
     Ui::MainWindow *ui;
-    OscillatorSource oscillatorSource;
+    GranularSynthesis granularSynthesis;
     AudioPlayer audioPlayer;
     drumstick::rt::MIDIInput midiInput;
+
 };
 
 #endif // MAINWINDOW_H

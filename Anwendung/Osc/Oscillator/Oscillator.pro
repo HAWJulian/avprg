@@ -6,6 +6,7 @@
 
 QT       += core gui widgets multimedia
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Oscillator
 TEMPLATE = app
@@ -13,14 +14,18 @@ TEMPLATE = app
 INCLUDEPATH += ../audioEngine
 SOURCES += main.cpp\
         mainwindow.cpp\
-        oscillatorsource.cpp\
-    oscillator.cpp \
-    envelope.cpp
+    envelope.cpp \
+    granularsynthesis.cpp \
+    qcustomplot/qcustomplot.cpp \
+    grain.cpp
+
 
 HEADERS  += mainwindow.h \
-    oscillatorsource.h\
-    oscillator.h \
-    envelope.h
+    envelope.h \
+    granularsynthesis.h \
+    qcustomplot/qcustomplot.h \
+    grain.h
+
 
 FORMS    += mainwindow.ui
 

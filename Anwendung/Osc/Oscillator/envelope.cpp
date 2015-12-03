@@ -11,7 +11,7 @@ inline float gain2dB(float gain){
 }
 
 Envelope::Envelope()
-    : sampleRate(0), gain(0), state(OFF), releaseSeconds(0)
+    : sampleRate(0), gain(1), state(OFF), releaseSeconds(0)
     , attackSeconds(0), decaySeconds(0)
     , sustain_dB(MIN_GAIN_DB), minGain_dB(MIN_GAIN_DB)
 {
