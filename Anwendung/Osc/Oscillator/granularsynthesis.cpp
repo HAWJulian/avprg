@@ -9,6 +9,8 @@
 
 GranularSynthesis::GranularSynthesis()
 {
+
+    // Audioformat
     audioFormat.setCodec("audio/pcm");
     audioFormat.setByteOrder(QAudioFormat::LittleEndian);
     audioFormat.setChannelCount(2);
@@ -16,20 +18,38 @@ GranularSynthesis::GranularSynthesis()
     audioFormat.setSampleType(QAudioFormat::Float);
     audioFormat.setSampleRate(44100);
 
-    // Rate initialisieren (slowest first)
+    // Default: keine Datei:
+    fileSet = false;
+
+    // Rate initialisieren (1 s)
     setRate(1000);
+
+    // Position initialisieren (an den Anfang)
+    positionIndex = 0;
+
+    // Envelope
+    attackSeconds = 0;
+    holdSeconds = 0;
+    releaseSeconds = 0;
+
+    // Filter
+    filter_type = LOWPASS;
+    filter_freq = 500;
+    filter_q = 1;
+    filter_gain = 0;
 
     iter = 0;
 
-    file = wavread("D:\\avprgprojekt\\avprg\\Anwendung\\Osc\\trasure.wav");
+}
 
-    qDebug() << "Anzahl Samples: " << file.data.size();
+void GranularSynthesis::setFile(std::string fileURL) {
+    file = wavread(fileURL);
+    fileSet = true;
+}
 
-    //outputInfo(file.data);
-
-    qDebug() << "Anz. Grains: " << allgrains.size();
-//    qDebug() << "Anz. Grains: " << allgrains.size();
-
+void GranularSynthesis::lock() {
+    fileSet = false;
+    allgrains.clear();
 }
 
 void GranularSynthesis::setRate(int value) {
@@ -54,101 +74,142 @@ void GranularSynthesis::outputInfo(QVector<float> data)
 }
 
 
-void GranularSynthesis::setSelectedOscillator(int index){
-   // oscillator.setType((Oscillator::Type)index);
+void GranularSynthesis::setFilterType(int index) {
+    filter_type = (FilterType)index;
+
+    filter_l.set(filter_type, filter_freq, filter_q, filter_gain);
+    filter_r.set(filter_type, filter_freq, filter_q, filter_gain);
 }
+
+void GranularSynthesis::setFilterQ(float value) {
+    this->filter_q = value;
+
+    filter_l.set(filter_type, filter_freq, filter_q, filter_gain);
+    filter_r.set(filter_type, filter_freq, filter_q, filter_gain);
+}
+
+void GranularSynthesis::setFilterGain(float value) {
+    this->filter_gain = value;
+
+    filter_l.set(filter_type, filter_freq, filter_q, filter_gain);
+    filter_r.set(filter_type, filter_freq, filter_q, filter_gain);
+}
+
 void GranularSynthesis::setFrequency(float frequency){
-   // oscillator.setFrequency(frequency);
-}
-void GranularSynthesis::setNote(int noteNumber){
-    float frequency = 440.0 * pow(2.0, (noteNumber - 69.0)/12.0);
-    setFrequency(frequency);
+
+    this->filter_freq = frequency;
+
+    filter_l.set(filter_type, filter_freq, filter_q, filter_gain);
+    filter_r.set(filter_type, filter_freq, filter_q, filter_gain);
+
 }
 
-void GranularSynthesis::setGain(float decibel){
-    float gain = pow(10, decibel/20.f);
-    //oscillator.setGain(gain);
+void GranularSynthesis::setPosition(float position){
+    this->positionIndex = (position/100.) * file.data.size();
+    //qDebug() << positionIndex;
 }
 
-void GranularSynthesis::noteOn(){
-    envelope.setState(Envelope::ATTACK);
-}
-void GranularSynthesis::noteOff(){
-    envelope.setState(Envelope::RELEASE);
-}
 void GranularSynthesis::setAttackSeconds(float value){
-    envelope.setAttackSeconds(value);
+    //float gain = pow(10, decibel/20.f);
+    //oscillator.setGain(gain);
+    this->attackSeconds = value;
 }
-
-void GranularSynthesis::setDecaySeconds(float value){
-    envelope.setDecaySeconds(value);
+void GranularSynthesis::setHoldSeconds(float value){
+    this->holdSeconds = value;
 }
-
 void GranularSynthesis::setReleaseSeconds(float value){
-    envelope.setReleaseSeconds(value);
-}
-
-void GranularSynthesis::setSustain_dB(float value){
-    envelope.setSustain_dB(value);
+    this->releaseSeconds = value;
 }
 
 void GranularSynthesis::start(){
-    //oscillator.initialize(audioFormat.sampleRate());
-    envelope.setSampleRate(audioFormat.sampleRate());
+    // Initialize Filter
+    filter_l.initialize(audioFormat.sampleRate());
+    filter_r.initialize(audioFormat.sampleRate());
+
+    filter_l.set(filter_type, filter_freq, filter_q, filter_gain);
+    filter_r.set(filter_type, filter_freq, filter_q, filter_gain);
 }
+
 const QAudioFormat& GranularSynthesis::format() const{
     return audioFormat;
 }
 
-float GranularSynthesis::createSample(){
-    //float sample = oscillator.getValue();
-    //sample = envelope.process(sample);
+sampleLR GranularSynthesis::createSample(){
 
+    // Grainberechnung nur, wenn eine WAV-Datei erfolgreich
+    // geladen und gesetzt ist...
+    if (fileSet) {
 
-    if (iter%rate == 0) {
-        QVector<float> graindata;
-        for (int i = 220000; i<250000; i++) {
-            graindata.push_back(file.data[i]);
+        if (iter%rate == 0) {
+            //QVector<float> graindata;
+
+            int bigrand = (rand()<<15)|rand();
+            //int start = bigrand % file.data.size();
+            int start_versatz = bigrand % 2000;
+            int start = positionIndex + start_versatz;
+            //for (int i = start; i<start+120000; i++) {
+            //    graindata.push_back(file.data[i]);
+            //}
+
+            Grain newgrain = Grain(&file.data[start], audioFormat.sampleRate(), releaseSeconds, attackSeconds, holdSeconds);
+            allgrains.push_back(newgrain);
         }
 
-        Grain newgrain = Grain(graindata);
-        allgrains.push_back(newgrain);
+        iter++;
+        if (iter == 4410000) {
+            iter = 0;
+        }
+
+        float samplel = 0.f;
+        float sampler = 0.f;
+
+        for(int i=0; i < allgrains.size(); i++){
+
+           if (allgrains[i].alive) {
+                float man = allgrains[i].getValue();
+                samplel += allgrains[i].getLeft() * man;
+                sampler += allgrains[i].getRight() * man;
+           } else {
+                allgrains.erase(allgrains.begin()+i);
+           }
+
+        }
+
+        sampleLR newLRSamples;
+
+        newLRSamples.sampleL = filter_l.processOneSample(samplel);
+        newLRSamples.sampleR = filter_r.processOneSample(sampler);
+
+        return newLRSamples;
+
+    } else {
+
+        // Keine WAV Datei geladen, also kein Audio ausgeben:
+        sampleLR newLRSamples;
+        newLRSamples.sampleL = 0.0;
+        newLRSamples.sampleR = 0.0;
+
+        return newLRSamples;
+
     }
-
-    iter++;
-    if (iter == 441000) {
-        iter = 0;
-    }
-
-    float sample = 0.f;
-
-
-    for(int i=0; i < allgrains.size(); i++){
-
-       if (allgrains[i].alive) {
-            sample += allgrains[i].getValue();
-       } else {
-            allgrains.erase(allgrains.begin()+i);
-       }
-
-    }
-
-    return sample;
 }
 
 qint64 GranularSynthesis::read(float** buffer, qint64 numFrames){
     // get audio data for left channel
     for(int i = 0; i < numFrames; i++){
-        buffer[0][i] = createSample();
+
+        sampleLR nextLRSamples = createSample();
+
+        buffer[0][i] = nextLRSamples.sampleL;
+
+        for(int c = 1; c < audioFormat.channelCount(); c++){
+            buffer[c][i] = nextLRSamples.sampleR;
+        }
 
     }
-    // copy to other channels
-    for(int c = 0; c < audioFormat.channelCount(); c++){
-        for(int i = 0; i < numFrames; i++){
-            buffer[c][i] = buffer[0][i];
-        }
-    }
+
     return numFrames;
+
 }
 void GranularSynthesis::stop(){}
 
@@ -187,6 +248,7 @@ Wav GranularSynthesis::wavread(std::string wavPath) {
 
     if (error = fopen_s(&fp, wavPath_c, "rb") != 0){
         qDebug() << "ERROR : Cannot read wave file. Check file path.";
+        output.okay = false;
         output.bits = -1;
         output.channel = -1;
         output.fs = -1;
@@ -251,5 +313,6 @@ Wav GranularSynthesis::wavread(std::string wavPath) {
     //}
 
     fclose(fp);
+    output.okay = true;
     return output;
 }

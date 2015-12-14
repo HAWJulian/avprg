@@ -16,8 +16,22 @@ MainWindow::MainWindow(QWidget *parent)
     initializeAudio();
     initializeMidi();
 
+    // Fenster nicht vergößerbar:
+    this->setWindowFlags(this->windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
 
-    // The following plot setup is mostly taken from the plot demos:
+    // Waveform Plot - Hintergrund färben & Achsen ausblenden
+    ui->plot->setBackground(QColor(40, 40, 40));
+    ui->plot->xAxis->setVisible(false);
+    ui->plot->yAxis->setVisible(false);
+
+
+    // Position durch klicken in die Waveform wählbar...
+    connect(ui->plot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(mouseRelease(QMouseEvent*)));
+
+}
+
+void MainWindow::drawWaveform() {
+
     ui->plot->addGraph();
     ui->plot->addGraph();
     ui->plot->graph(0)->setPen(QPen(QColor(60, 220, 170, 255)));
@@ -25,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plot->graph(0)->setBrush(QBrush(QColor(60, 220, 170, 255)));
     ui->plot->graph(1)->setBrush(QBrush(QColor(60, 220, 170, 255)));
 
-    int values = 1000;
+    int values = 5000;
     int samplesstep = (granularSynthesis.file.data.size() / values);
     int sumupinterval = samplesstep/2;
 
@@ -50,28 +64,38 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plot->graph(0)->setData(x, y);
     ui->plot->graph(1)->setData(x, y2);
 
-    ui->plot->setBackground(QColor(40, 40, 40));
-
-    ui->plot->xAxis->setVisible(false);
-    ui->plot->yAxis->setVisible(false);
-
     ui->plot->rescaleAxes();
-    ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
-    ui->horizontalScrollBar->setRange(0, values);
-
-    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horzScrollBarChanged(int)));
-
+    ui->plot->replot();
 
 }
 
-void MainWindow::horzScrollBarChanged(int value)
+void MainWindow::onControllerMidi(int channel, int data1, int data2) {
+
+    int index = (int) ((data2/127.)*10000);
+    ui->posSlider->setValue(index);
+
+}
+
+
+void MainWindow::ManageCursor(QCustomPlot *customPlot, QCPCursor *cursor, double x, QPen pen)
 {
-  if (qAbs(ui->plot->xAxis->range().center()-value/100.0) > 0.01) // if user is dragging plot, we don't want to replot twice
-  {
-    ui->plot->xAxis->setRange(value/100.0, ui->plot->xAxis->range().size(), Qt::AlignCenter);
-    ui->plot->replot();
-  }
+
+        if(cursor->vLine) customPlot->removeItem(cursor->vLine);
+        cursor->vLine = new QCPItemLine(customPlot);
+        customPlot->addItem(cursor->vLine);
+        cursor->vLine->setPen(pen);
+        cursor->vLine->start->setCoords( x, QCPRange::minRange);
+        cursor->vLine->end->setCoords( x, QCPRange::maxRange);
+
+}
+
+void MainWindow::mouseRelease(QMouseEvent* event)
+{
+    QCustomPlot *customPlot=ui->plot;
+    double x=customPlot->xAxis->pixelToCoord(event->pos().x());
+    int index = (int) ((x/5000.)*10000);
+    ui->posSlider->setValue(index);
 }
 
 MainWindow::~MainWindow()
@@ -81,19 +105,23 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::initializeAudio(){
+
     on_frequencySlider_valueChanged(ui->frequencySlider->value());
+
     on_gainSlider_valueChanged(ui->gainSlider->value());
+
     on_dialAttack_valueChanged(ui->dialAttack->value());
-    ui->labelAttack->setNum(ui->dialAttack->value());
-    on_dialDecay_valueChanged(ui->dialDecay->value());
-    ui->labelDecay->setNum(ui->dialDecay->value());
-    on_dialSustain_valueChanged(ui->dialSustain->value());
-    ui->labelSustain->setNum(ui->dialSustain->value());
+    ui->labelAttack->setNum(ui->dialAttack->value()/100.f);
+
+    on_dialHold_valueChanged(ui->dialHold->value());
+    ui->labelHold->setNum(ui->dialHold->value()/100.f);
+
     on_dialRelease_valueChanged(ui->dialRelease->value());
-    ui->labelRelease->setNum(ui->dialRelease->value());
+    ui->labelRelease->setNum(ui->dialRelease->value()/100.f);
 
     audioPlayer.setAudioSource(&granularSynthesis);
     audioPlayer.start();
+
 }
 
 void MainWindow::initializeMidi(){
@@ -104,193 +132,92 @@ void MainWindow::initializeMidi(){
         on_comboMidiInputBox_activated(ui->comboMidiInputBox->currentText());
     }
 
-    connect(&midiInput, SIGNAL(midiNoteOn(const int, const int, const int)), this, SLOT(onMidiNoteOn(const int, const int, const int)));
-    connect(&midiInput, SIGNAL(midiNoteOff(const int, const int, const int)), this, SLOT(onMidiNoteOff(const int, const int, const int)));
+    connect(&midiInput, SIGNAL(midiController(int,int,int)), this, SLOT(onControllerMidi(int,int,int)));
 
 }
-
-void MainWindow::onMidiNoteOff(const int chan, const int note, const int vel){
-    //prependMessage(QString("note off: ch=%1 note=%2 vel=%3\n").arg(chan).arg(note).arg(vel));
-}
-
-void MainWindow::onMidiNoteOn(const int chan, const int note, const int vel){
-    if (vel == 0){
-        onMidiNoteOff(chan, note, vel);
-    }
-    //prependMessage(QString("note on:  ch=%1 note=%2 vel=%3\n").arg(chan).arg(note).arg(vel));
-}
-
 
 void MainWindow::on_frequencySlider_valueChanged(int value)
 {
-    // 0 ... 100% --> 100Hz ... 10000Hz
-    float scaledValue = 2 * value / 100.f + 2;
-    float frequency = pow(10, scaledValue);
+    // 0 ... 100% --> 20Hz ... 20000Hz
+    float scaledValue = 3 * value / 100.f + 1;
+    float frequency = 2*pow(10, scaledValue);
 
     ui->frequencyLabel->setText(QString::number((int)frequency));
     granularSynthesis.setFrequency(frequency);
 }
 
-void MainWindow::on_waveformCombobox_activated(int index)
+void MainWindow::on_filtertypeCombobox_activated(int index)
 {
-    granularSynthesis.setSelectedOscillator(index);
+    granularSynthesis.setFilterType(index);
 }
+
+void MainWindow::on_qSlider_valueChanged(int value)
+{
+    granularSynthesis.setFilterQ(value);
+}
+
 
 void MainWindow::on_gainSlider_valueChanged(int value)
 {
-    granularSynthesis.setGain(value);
-}
-
-
-void MainWindow::on_note_1_clicked(bool checked)
-{
-    qDebug() << "note 1";
-
-    if (checked){
-        granularSynthesis.setNote(60);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_2_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(61);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_3_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(62);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_4_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(63);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_5_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(64);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_6_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(65);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_7_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(66);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_8_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(67);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_9_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(68);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_10_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(69);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_11_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(70);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
-}
-void MainWindow::on_note_12_clicked(bool checked)
-{
-    if (checked){
-        granularSynthesis.setNote(71);
-        granularSynthesis.noteOn();
-    }
-    else{
-        granularSynthesis.noteOff();
-    }
+    granularSynthesis.setFilterGain(value);
+    ui->GainLabel->setNum(ui->gainSlider->value());
 }
 
 void MainWindow::on_dialAttack_valueChanged(int value)
 {
     granularSynthesis.setAttackSeconds(value/100.f);
+    ui->labelAttack->setNum(ui->dialAttack->value()/100.f);
 }
 
-void MainWindow::on_dialDecay_valueChanged(int value)
+void MainWindow::on_dialHold_valueChanged(int value)
 {
-    granularSynthesis.setDecaySeconds(value/100.f);
+    granularSynthesis.setHoldSeconds(value/100.f);
+    ui->labelHold->setNum(ui->dialHold->value()/100.f);
 }
 
-void MainWindow::on_dialSustain_valueChanged(int value)
-{
-    granularSynthesis.setSustain_dB(value - 100);
-}
 
 void MainWindow::on_dialRelease_valueChanged(int value)
 {
     granularSynthesis.setReleaseSeconds(value/100.f);
+    ui->labelRelease->setNum(ui->dialRelease->value()/100.f);
 }
 
-void MainWindow::on_comboMidiInputBox_activated(const QString &arg1)
+void MainWindow::on_comboMidiInputBox_activated(const QString &string)
 {
-
+    midiInput.open(string);
 }
 
 void MainWindow::on_rateSlider_valueChanged(int value)
 {
     granularSynthesis.setRate(value);
 }
+
+void MainWindow::on_posSlider_valueChanged(int value)
+{
+    float value_f = value/100.;
+
+    double x = (value_f / 100.) * 5000;
+
+    QCustomPlot *customPlot=ui->plot;
+
+    ManageCursor(customPlot, &cursor, x, QPen(Qt::white, 2, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin));
+    customPlot->replot();
+
+    granularSynthesis.setPosition(value_f);
+}
+
+void MainWindow::on_openWAVButton_clicked()
+{
+    granularSynthesis.lock();
+    ui->posSlider->setValue(0);
+    QString fileURL = QFileDialog::getOpenFileName(this, tr("Open WAV File"), "D:\avprgprojekt\avprg\Anwendung", tr("WAV (*.wav)"));
+    std::string fileURL_str = fileURL.toUtf8().constData();
+
+    if (fileURL_str == "") {
+        qDebug() << "no file";
+    } else {
+        granularSynthesis.setFile(fileURL_str);
+        this->drawWaveform();
+    }
+}
+

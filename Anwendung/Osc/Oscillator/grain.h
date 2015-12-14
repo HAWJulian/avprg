@@ -5,28 +5,35 @@
 
 class Grain{
 public:
-    Grain(QVector<float> grainData);
-    enum Type {SINE, TRIANGLE, SQUARE, SAW, NOISE};
-    void initialize(float sampleRate);
-    void setFrequency(float frequency);
-    void setType(Type type);
-    void setGain(float gain);
+    enum State {OFF, ATTACK, HOLD, RELEASE};
+    Grain(float* grainData, int sampleRate, float releaseSeconds, float attackSeconds, float holdSeconds);
     float getValue();
+    float getLeft();
+    float getRight();
 public:
     bool alive;
 private:
-    float sine();
-    float saw();
-    float triangle();
-    float square();
-    float noise();
+    void setState(State state);
+    float process(float input);
 private:
-    QVector<float> grainData;
+    float leftv;
+    float rightv;
+    float* grainData;
+    float gain;
     int index;
     float sampleRate;
-    float frequency;
-    float gain;
-    Type type;
+    State state;
+    float gainChange;
+    float releaseSeconds;
+    float attackSeconds;
+    float holdSeconds;
+    int holdSamples;
+    int totalSamples;
+    float sustain_dB;
+    float sustainGain;
+    float minGain_dB;
+    float minGain;
+    float overallgain;
 };
 
 #endif // GRAIN

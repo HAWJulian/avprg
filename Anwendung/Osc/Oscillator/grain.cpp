@@ -1,76 +1,133 @@
 #include <math.h>
 #include <stdlib.h>
 #include "grain.h"
+#include <QDebug>
 
-const float pi = 3.1415926f;
+const float MIN_GAIN_DB = -100;
 
-Grain::Grain(QVector<float> grainData)
-: sampleRate(0), index(0), frequency(0), type(SINE), gain(1)
-{
+inline float dB2gain(float dB){
+    return pow(10, dB/20);
+}
+inline float gain2dB(float gain){
+    return 20*log(gain);
+}
+
+Grain::Grain(float* grainData, int sampleRate, float releaseSeconds, float attackSeconds, float holdSeconds) {
+
+    // Zeiger auf Position in der WAV-Daten-Array:
+    // Zeigt auf den Startwert für diesen Grain:
     this->grainData = grainData;
+
+    sustainGain = dB2gain(0);
+    sustain_dB = 0;
+
+    minGain_dB = MIN_GAIN_DB;
+    minGain = dB2gain(MIN_GAIN_DB);
+
+    // Grain wird bei der Erstellung aktiv geschaltet.
     this->alive = true;
 
+    // Samplerate
+    this->sampleRate = sampleRate;
+
+    // Envelope
+    this->releaseSeconds = releaseSeconds;
+    this->attackSeconds = attackSeconds;
+    this->holdSeconds = holdSeconds;
+
+    holdSamples = this->attackSeconds*this->sampleRate + this->sampleRate*this->holdSeconds;
+    totalSamples = this->releaseSeconds*this->sampleRate + holdSamples;
+
+    // Start Envelope-Status:
+    setState(ATTACK);
+
+    // Zeiger innerhalb des Grains
+    index = 0;
+
+    leftv = ((float) rand()/ RAND_MAX);
+    overallgain = 0.5*((float) rand()/ RAND_MAX) + 0.5;
+    rightv = 1-leftv;
+
 }
 
-void Grain::initialize(float sampleRate){
-    this->sampleRate = sampleRate;
+float Grain::getLeft() {
+    return leftv;
 }
-void Grain::setFrequency(float setFrequency){
-    frequency = setFrequency;
-}
-void Grain::setType(Type type){
-    this->type = type;
-}
-void Grain::setGain(float gain){
-    this->gain = gain;
+float Grain::getRight() {
+    return rightv;
 }
 
 float Grain::getValue(){
 
-    index = index+1;
+    if (this->alive) {
 
-    if (index == grainData.size()) {
-        index = 0;
-        this->alive = false;
-    }
+        index = index+1;
 
-    return grainData[index];
-}
+        if (index == holdSamples) {
+            setState(RELEASE);
+        }
 
-float Grain::sine(){
-    float value = sin(2 * pi * index * frequency / sampleRate);
-    index++;
-    return gain * value;
-}
-float Grain::saw(){
-    float period = sampleRate / frequency;
-    float modulo = fmod(index, period);
-    index++;
-    float value = (modulo / period) * 2 - 1;
-    return gain * value;
-}
-float Grain::square(){
-    float value = sin(2 * pi * index * frequency / sampleRate);
-    index++;
-    return (value > 0)? gain : -gain;
-}
-float Grain::triangle(){
-    float period = sampleRate / frequency;
-    float modulo = fmod(index, period);
-    index++;
+        if (index == totalSamples) {
+            index = 0;
+            this->alive = false;
+        }
 
-    float value = (modulo / period) * 4;
-    if (value < 2){
-        return gain * (value - 1);
-    }
-    else{
-        return gain * (1 + 2 - value);
+        return overallgain*process(grainData[index]);
+
+    } else {
+
+        return 0;
+
     }
 }
-float Grain::noise()
-{
-    float random = rand();
-    return gain * 2 * random / RAND_MAX - 1;
+
+
+void Grain::setState(State state){
+
+    // Neuen Envelope-Status setzen:
+    this->state = state;
+
+    if (state == ATTACK && attackSeconds == 0){
+        setState(HOLD);
+    }
+    else if (state == HOLD && holdSeconds == 0){
+        gain = sustainGain;
+        setState(RELEASE);
+    }
+    else if (state == RELEASE && releaseSeconds == 0){
+        setState(OFF);
+    }
+    else {
+        if (state == OFF){
+            gain = 0;
+        }
+        if (state == ATTACK){
+            float gainChange_dB = fabs(MIN_GAIN_DB) / (attackSeconds * sampleRate);
+            gainChange = dB2gain(gainChange_dB);
+            gain = minGain;
+        }
+        if (state == HOLD){
+            gain = sustainGain;
+            gainChange = 1;
+        }
+        if (state == RELEASE){
+            float gainChange_dB = fabs(sustain_dB - MIN_GAIN_DB)/(sampleRate * releaseSeconds);
+            gainChange =  1/dB2gain(gainChange_dB);
+        }
+    }
 }
 
+
+float Grain::process(float input){
+
+    if (state == ATTACK && gain >= 1){
+        setState(HOLD);
+    }
+    if (state == RELEASE && gain < minGain){
+        setState(OFF);
+    }
+    gain *= gainChange;
+
+    return gain * input;
+}
 
