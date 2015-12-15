@@ -26,47 +26,44 @@ private slots:
 
     void on_frequencySlider_valueChanged(int value);
 
-    void on_waveformCombobox_activated(int index);
+    void on_filtertypeCombobox_activated(int index);
 
     void on_gainSlider_valueChanged(int value);
-    void on_note_1_clicked(bool checked);
-    void on_note_2_clicked(bool checked);
-    void on_note_3_clicked(bool checked);
-    void on_note_4_clicked(bool checked);
-    void on_note_5_clicked(bool checked);
-    void on_note_6_clicked(bool checked);
-    void on_note_7_clicked(bool checked);
-    void on_note_8_clicked(bool checked);
-    void on_note_9_clicked(bool checked);
-    void on_note_10_clicked(bool checked);
-    void on_note_11_clicked(bool checked);
-    void on_note_12_clicked(bool checked);
-
 
     void on_dialAttack_valueChanged(int value);
 
-    void on_dialDecay_valueChanged(int value);
-
-    void on_dialSustain_valueChanged(int value);
+    void on_dialHold_valueChanged(int value);
 
     void on_dialRelease_valueChanged(int value);
 
-    void on_comboMidiInputBox_activated(const QString &arg1);
+    void on_comboMidiInputBox_activated(const QString &string);
 
-    void onMidiNoteOff(const int chan, const int note, const int vel);
-    void onMidiNoteOn(const int chan, const int note, const int vel);
-
-    void horzScrollBarChanged(int value);
+    void onControllerMidi(int channel, int data1, int data2);
 
     void on_rateSlider_valueChanged(int value);
 
+    void mouseRelease(QMouseEvent* event);
+
+    void on_posSlider_valueChanged(int value);
+
+    void on_openWAVButton_clicked();
+
+
+    void on_qSlider_valueChanged(int value);
+
 private:
+    typedef struct {
+        QCPItemLine *vLine;
+    } QCPCursor;
     void initializeAudio();
     void initializeMidi();
+    void ManageCursor(QCustomPlot *customPlot, QCPCursor *cursor, double x, QPen pen);
+    void drawWaveform();
     Ui::MainWindow *ui;
     GranularSynthesis granularSynthesis;
     AudioPlayer audioPlayer;
     drumstick::rt::MIDIInput midiInput;
+    QCPCursor cursor;
 
 };
 

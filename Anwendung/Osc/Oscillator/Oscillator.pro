@@ -17,14 +17,16 @@ SOURCES += main.cpp\
     envelope.cpp \
     granularsynthesis.cpp \
     qcustomplot/qcustomplot.cpp \
-    grain.cpp
+    grain.cpp \
+    filter.cpp
 
 
 HEADERS  += mainwindow.h \
     envelope.h \
     granularsynthesis.h \
     qcustomplot/qcustomplot.h \
-    grain.h
+    grain.h \
+    filter.h
 
 
 FORMS    += mainwindow.ui
