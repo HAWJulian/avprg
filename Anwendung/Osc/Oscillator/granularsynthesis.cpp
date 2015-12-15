@@ -21,7 +21,7 @@ GranularSynthesis::GranularSynthesis()
 
     iter = 0;
 
-    file = wavread("D:\\avprgprojekt\\avprg\\Anwendung\\Osc\\trasure.wav");
+    file = wavread("D:\\avprgprojekt\\Anwendung\\Osc\\trasure.wav");
 
     qDebug() << "Anzahl Samples: " << file.data.size();
 
@@ -43,7 +43,7 @@ void GranularSynthesis::outputInfo(QVector<float> data)
     */
 
     std::ofstream outputFile;
-    outputFile.open("D:\\avprgprojekt\\avprg\\Anwendung\\Osc\\example.txt");
+    outputFile.open("D:\\avprgprojekt\\Anwendung\\Osc\\example.txt");
 
     for (int count = 0; count < 1000000; count++)
     {
