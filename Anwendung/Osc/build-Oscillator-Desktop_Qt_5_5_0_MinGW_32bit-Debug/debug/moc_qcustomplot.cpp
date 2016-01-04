@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Oscillator/qcustomplot/qcustomplot.h"
+#include "../../../Granularsynthesizer/Granularsynthesizer/qcustomplot/qcustomplot.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/QList>
