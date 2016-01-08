@@ -12,21 +12,89 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{titling}
+\usepackage{listings}
+\usepackage{color}
 %\pagenumbering{gobble}
-\title{Object Tracking}
-\setlength{\droptitle}{-0em}
+%define listings language
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\lstset{language=C++,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#},
+                numbers=left,
+                breaklines=true,
+                backgroundcolor=\color{lightgray}
+}
+\title{Object Tracking Abakus}
+\setlength{\droptitle}{-10em}
 \author{Stefan Schäfers (2175460), Julian Roosch (2203745)}
 \begin{document}
 \maketitle
 %Object Tracking in einem Maskierten Bild, Pseudocode, schlechte Laufzeit, optimierung durch methoden die bereits in opencv implementiert sind
+\section{Die Idee}
+Zu beginn des Projektes wurde ein Algorithmus zur Filterung eines maskierten Ausgangsbildes entworfen und implementiert. Dabei wurden folgende Schritte durchlaufen:
+% - So lange unbesuchte Pixel im Bild exisiteren, das Bilde Zeile für Zeile von links nach rechts durchsuchen
+% - Wenn ein we
 \begin{enumerate}
-\item So lange nicht alle Pixel durchlaufen, das Bild Zeile für Zeile von links nach rechts durchsuchen
-\item Wenn ein Weißes Pixel gefunden wird, schwarz färben; x- und y-Wert des Pixels auf Variablen addieren, Anzahl um eins erhöhen
-\item So lange \glqq unbesuchte\grqq{} Pixel existieren, finde alle Nachbarpixel und wiederhole Schritt 2
-\item Wenn die Anzahl der Pixel eine Mindestgröße überschreitet wurde ein Objekt erkannt
-\item Sonst war es nur Rauschen oder sonstige Fehlerquellen
+\item So lange unbesuchte Pixel im Bild existieren, das Bild Zeile für Zeile von links nach rechts durchsuchen
+\item Wenn ein Weißes Pixel gefunden wird, schwarz färben
+\item Zur eventuellen Schwerpunktsberechnung x- und y-Wert des Pixels auf Variablen addieren, Anzahl der gefundenen Pixel im Cluster um eins erhöhen
+\item So lange unbesuchte Pixel im Cluster existieren, finde alle Nachbarpixel und wiederhole Schritt 2 und 3
+\item Wenn die Anzahl der Pixel im Cluster eine festgelegte Mindestgröße überschreitet, wurde ein Objekt erkannt
+\item Ermittlung des Schwerpunktes des Clusters anhand der definierten Variablen
+\item Verwertung der Schwerpunkte durch Sounderzeugung
 \end{enumerate}
 
+Schnell wurde klar, dass der Algorithmus keine gute Laufzeit hat und somit unnutzbar für unser Projekt ist. Er war jedoch unser Ausgangspunkt des Bilderverarbeitungsalgorithmus der Schritt für Schritt durch in OpenCV implementierte Methoden verbessert wurde.
+\section{Maskierung}
+Der erste Schritt unserer Bildverarbeitung ist die Übertragung des Ausgangsbildes in ein Binärbild. Hier wird festgelegt, welche Farben Maskiert werden sollen. Dazu wird das Bild vom RGB-Farbraum in den HSV-Farbraum übertragen. 
+
+Maskiert wird das Bild über Thresholds, also Grenzen, die ein Pixel in seiner Wertigkeit einhalten muss um maskiert oder nicht maskiert zu werden. Die Nutzung des RGB-Farbraumes ist dabei nicht sehr praktikabel. Möchte man beispielsweise wie in unserem Projekt die Farbe Grün maskieren, so werden Ober- und Untergrenzen im Farbraum definiert. Der RGB-Farbraum bietet also bezüglich der Einhaltung von Grenzen drei Werte zur Verfügung: der R-, G- und B-Wert. Problematisch an dieser Aufteilung ist, dass ein Grün, je nach Beleuchtung und Qualität der Kamera, auf einem Bild heller und dunkler abgebildet werden kann als die originale Farbe. Im Extremfall (dunkelstes Grün nahezu schwarz, hellstes nahezu weiß) sind die Thresholds also Beispielsweise: (0,10,0) - (50,255,0) - (245,255,245). Diese Thresholds umfassen jedoch auch viele Farben, die nicht maskierten werden sollen. Um die Begrenzung des Grüntons und einige dazugehörige Schattierungen zu vereinfachen, wird das bild in den HSV-Farbraum übertragen. Dort kann über eine starke Begrenzung im H-Wert der Farbton bestimmt werden, und über schwächere Begrenzungen der S- und V-Werte die nötigige Varianz zur Maskierung der Schattierungen ermöglicht werden.
+\begin{lstlisting}
+cvtColor(input, input, CV_BGR2HSV);
+medianBlur(input, input, 11);
+Mat output(input.rows, input.cols, CV_8UC1);
+inRange(input, Scalar(minH, minS, minV), Scalar(maxH, maxS, maxV), output);
+\end{lstlisting}
+%code beispiel
+Wie aus dem Codeausschnitt hervorgeht, werden hier erste Maßnahmen zur Fehlerbehebung vorgenommen. Dabei wird bereits vor der Maskierung das Ausgangsbild einem medianBlur unterzogen, um das Rauschen aus dem Originalbild zu verringern.
+\section{Filterung}
+Abhängig von der Qualität der Kamera, mit der die Bilder aufgezeichnet werden, muss das maskierte Bild weiter verarbeitet werden.
+\begin{enumerate}
+\item Das maskierte Bild wird noch einmal einem medianBlur unterzogen. Auch nach dem medianBlur \emph{vor} der Maskierung verbleiben einige Fehler im maskierten Ausgangsbild. Durch das erneute Anwenden des medianBlur werden weitere Fehler (meist weiße Fehlerpixel) behoben.
+\item Das nun relativ fehlerfreie Bild wird durch zwei Iterationen der erode-Funktion bearbeitet 
+\item Um die Formen des maskierten Bildes komplett zu schließen, wird das Bild anschließend durch zwei Iterationen der dillate-Funktion bearbeitet.
+\end{enumerate}
+Die Punkte 2. und 3. sind dabei sehr wichtig für die weitere Verwendung des Bildes, sowohl in der Wertigkeit, als auch in ihrer Reihenfolge. Für die nächsten Schritte ist es sehr wichtig, dass die Kontur eines Pixelclusters klar abgegrenzt ist. Die Anwendung der erode-Funktion gefolgt von der dillate-Funktion sorgt dafür, dass Formen nach Innen geschlossen werden und weitere weiße Pixelfehler behoben werden. Wendet man die beiden Funktionen andersherum an, so würden die Formen nach außen geschlossen und schwarze Pixelfehler behoben werden.
+\section{Auswertung}
+Zum Auswerten der Positionen der Kugeln, müssen nun die Zentren der Pixelcluster ermittelt werden. Dafür werden zunächst die Konturen der weißen Areale definiert:
+\begin{lstlisting}
+cv::findContours(contourOutput, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+\end{lstlisting}
+Die bereits in OpenCV implementierte Funktion findContours liefert dabei alle Konturpixel eines abgeschlossenen weißen Pixelclusters. 
+
+Hier wird nun klar, warum eine gute Filterung sehr wichtig ist: Der Algorithmus erkennt eine Kontur erst als eine eigene Kontur an, wenn diese eine gewissen Anzahl an Pixeln überschreitet. Würde sich beispielsweise ein weißes Fehlerpixel noch im Bild befinden, so würde dieses Pixel einer Kontur zugewiesen werden und somit die Berechnung des Zentrums stark beeinträchtigen.
+
+Die Berechnung der Zentren erfolgt nun anhand der \emph{Moments} einer \emph{Kontur}.
+\begin{lstlisting}
+Moments mu = moments(contours[i], false);
+Point mc(mu.m10/mu.m00, mu.m01/mu.m00);
+\end{lstlisting}
+Dabei werden die x- und y-Werte der Moments einer Kontur gemittelt und der daraus resultierende Punkt als Mittelpunkt der Kontur definiert.
+\section{Verwendung}
+Bevor alle genannten Schritte durchgeführt werden, müssen immer gewissen Bedingungen erfüllt sein. Wichtige Kriterien sind dabei:
+\begin{enumerate}
+\item Es müssen exakt so viele Objekte (Pixelcluster) erkannt werden, wie erwartet wurden
+\item Jeder Pixelcluster muss dabei eine Mindestgröße überschreiten
+\item Das Zentrum einer Kontur darf nicht zu weit am Rand des Bildes sein
+\item Das Zentrum einer Kugel darf im Laufe mehrerer Bilder in vertikale Richtung einen definierten Bereich nicht verlassen
+\end{enumerate}
+Das Einhalten dieser Regeln hilft dabei weitere Fehler, die auf Grund der relativ schlechten Bildqualität der Kamera entstehen können, zu beheben. Bilder, in denen eine oder mehrere Regeln nicht eingehalten wird/werden, werden im Programmablauf ignoriert und nicht weiter verarbeitet.
+
+Läuft hingegen der Programmcode für ein Bild komplett durch, so werden die Daten (Zentren der Konturen) an die Sounderzeugung skaliert weitergeleitet - die Bedienbarkeit ist somit hergestellt.
+\iffalse
 \begin{enumerate}
 \item Hole Inputimage von Kamera
 \item Konvertieren des Bildes in den HSV-Farbraum für bessere Thresholds
@@ -38,5 +106,6 @@
 \item Anhand der Größe der Rückgabe erkennen, ob die korrekte Anzahl an Objekten mit der gewünschten Größe gefunden werden
 \item Ist dies der Fall, Berechnung der Zentren der Objekte über moments
 \end{enumerate}
+\fi
 
 \end{document}
