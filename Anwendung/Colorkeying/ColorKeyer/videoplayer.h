@@ -5,6 +5,7 @@
 #include <QImage>
 #include "videoengine.h"
 #include "colorkeyer.h"
+#include "asdf.h"
 namespace Ui {
 class VideoPlayer;
 }
@@ -16,7 +17,7 @@ class VideoPlayer : public QMainWindow
 public:
     explicit VideoPlayer(QWidget *parent = 0);
     ~VideoPlayer();
-
+    void verbinden(asdf* x);
 private slots:
     void on_playButton_clicked();
 

@@ -1,4 +1,5 @@
 #include "colorkeyer.h"
+#include "asdf.h"
 using namespace cv;
 
 // Referenzfarbe
@@ -200,6 +201,7 @@ Mat ColorKeyer::process(const Mat &input){
             }
         }
     }
+    //todo fix to check on conditions above
     if(checkBorders(centers))
     {
         setValidValues(centers);
@@ -262,9 +264,35 @@ bool ColorKeyer::checkBorders(std::vector<Point> centers)
     }
     return true;
 }
+void ColorKeyer::setasdfobject(asdf *asdfobj)
+{
+    objectasdf = asdfobj;
+}
+
 void ColorKeyer::setValidValues(std::vector<Point> centers)
 {
     //handle
-    qDebug() << "valid values";
+
+    //float x = (float)centers[0].x;
+    /*
+    x /= 480.;
+    x *= 10000;
+    int y = (int) x;
+    */
+    //qDebug() << centers.size();
+
+    if(centers.size() != 0)
+    {
+        qDebug() << "valid values " << centers[0].x << " " << centers[0].y ;
+        float x = (float)centers[0].x;
+
+        x /= 480.;
+        x *= 10000;
+        int y = (int) x;
+        objectasdf->getData(y);
+    }
+
+
+    //objectasdf->getData(centers);
 }
 

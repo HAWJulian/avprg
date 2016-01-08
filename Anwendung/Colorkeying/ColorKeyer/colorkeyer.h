@@ -3,6 +3,7 @@
 
 #include "videoprocessor.h"
 #include "cvmattoqimage.h"
+#include "asdf.h"
 class ColorKeyer : public VideoProcessor
 {
 public:
@@ -19,6 +20,8 @@ public:
     void setPaintLines();
     cv::Mat getCurrentContours();
     cv::Mat contoursret;
+    void setasdfobject(asdf* asdfobj);
+
 private:
     cv::Mat maskColor(const cv::Mat&source);
     double minH;
@@ -27,6 +30,7 @@ private:
     double maxH;
     double maxS;
     double maxV;
+    asdf* objectasdf;
     bool paintC;
     bool paintExact;
     bool paintLines;
@@ -38,6 +42,8 @@ private:
     std::vector<cv::Point> sortCenters(std::vector<cv::Point> centers);
     bool checkBorders(std::vector<cv::Point> centers);
     void setValidValues(std::vector<cv::Point> centers);
+signals:
+    void sendData(std::vector<cv::Point> sendCenters);
 };
 
 #endif // COLORKEYER_H

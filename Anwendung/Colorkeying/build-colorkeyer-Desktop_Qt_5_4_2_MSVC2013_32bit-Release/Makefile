@@ -177,6 +177,8 @@ Makefile: ..\ColorKeyer\colorkeyer.pro ..\..\..\..\qt\5.4\msvc2013\mkspecs\win32
 		..\..\..\..\qt\5.4\msvc2013\mkspecs\features\win32\default_pre.prf \
 		..\videoengine\opencv.pri \
 		..\videoengine\videoengine.pri \
+		..\audioEngine\audioplayer.pri \
+		..\Granularsynthesizer\Granularsynthesizer.pro \
 		..\..\..\..\qt\5.4\msvc2013\mkspecs\features\resolve_config.prf \
 		..\..\..\..\qt\5.4\msvc2013\mkspecs\features\exclusive_builds_post.prf \
 		..\..\..\..\qt\5.4\msvc2013\mkspecs\features\default_post.prf \
@@ -196,8 +198,11 @@ Makefile: ..\ColorKeyer\colorkeyer.pro ..\..\..\..\qt\5.4\msvc2013\mkspecs\win32
 		..\ColorKeyer\colorkeyer.pro \
 		D:/qt/5.4/msvc2013/lib/qtmain.prl \
 		D:/qt/5.4/msvc2013/lib/Qt5Core.prl \
+		D:/qt/5.4/msvc2013/lib/Qt5PrintSupport.prl \
 		D:/qt/5.4/msvc2013/lib/Qt5Widgets.prl \
-		D:/qt/5.4/msvc2013/lib/Qt5Gui.prl
+		D:/qt/5.4/msvc2013/lib/Qt5Multimedia.prl \
+		D:/qt/5.4/msvc2013/lib/Qt5Gui.prl \
+		D:/qt/5.4/msvc2013/lib/Qt5Network.prl
 	$(QMAKE) -spec win32-msvc2013 -o Makefile ..\ColorKeyer\colorkeyer.pro
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\features\spec_pre.prf:
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\common\shell-win32.conf:
@@ -303,6 +308,8 @@ Makefile: ..\ColorKeyer\colorkeyer.pro ..\..\..\..\qt\5.4\msvc2013\mkspecs\win32
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\features\win32\default_pre.prf:
 ..\videoengine\opencv.pri:
 ..\videoengine\videoengine.pri:
+..\audioEngine\audioplayer.pri:
+..\Granularsynthesizer\Granularsynthesizer.pro:
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\features\resolve_config.prf:
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\features\exclusive_builds_post.prf:
 ..\..\..\..\qt\5.4\msvc2013\mkspecs\features\default_post.prf:
@@ -322,8 +329,11 @@ Makefile: ..\ColorKeyer\colorkeyer.pro ..\..\..\..\qt\5.4\msvc2013\mkspecs\win32
 ..\ColorKeyer\colorkeyer.pro:
 D:/qt/5.4/msvc2013/lib/qtmain.prl:
 D:/qt/5.4/msvc2013/lib/Qt5Core.prl:
+D:/qt/5.4/msvc2013/lib/Qt5PrintSupport.prl:
 D:/qt/5.4/msvc2013/lib/Qt5Widgets.prl:
+D:/qt/5.4/msvc2013/lib/Qt5Multimedia.prl:
 D:/qt/5.4/msvc2013/lib/Qt5Gui.prl:
+D:/qt/5.4/msvc2013/lib/Qt5Network.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-msvc2013 -o Makefile ..\ColorKeyer\colorkeyer.pro
 

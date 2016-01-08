@@ -1,6 +1,7 @@
 #include <QFileDialog>
 #include "videoplayer.h"
 #include "ui_videoplayer.h"
+#include "asdf.h"
 
 VideoPlayer::VideoPlayer(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,7 @@ VideoPlayer::VideoPlayer(QWidget *parent)
     connect(videoThread, SIGNAL(sendInputImage(const QImage&)), ui->inputFrame, SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendProcessedImage(const QImage&)), ui->processedFrame , SLOT(setImage(const QImage&)));
     connect(videoThread, SIGNAL(sendContoursImage(const QImage&)), ui->contoursFrame, SLOT(setImage(const QImage&)));
+   // connect(colorKeyer, SIGNAL)
     callSliderchange();
     setAllLabels();
     colorKeyer->setAmountOfObejects(ui->objectsslider->value());
@@ -27,6 +29,12 @@ VideoPlayer::~VideoPlayer()
     delete ui;
 }
 
+void VideoPlayer::verbinden(asdf * asdfobject)
+{
+    //connect(colorKeyer, SIGNAL(sendData(const std::vector<cv::Point>&)), asdfobject, SLOT(getData(const std::vector<cv::Point>&)));
+    colorKeyer->setasdfobject(asdfobject);
+    //asdfobject->on_openWAVButton_clicked();
+}
 
 void VideoPlayer::on_playButton_clicked()
 {
@@ -38,7 +46,7 @@ void VideoPlayer::on_openVideoFileButton_clicked()
 {
     // Kamera
 
-    videoThread->openCamera();
+    videoThread->openCamera(1,0);
     videoThread->start();
     return;
 
