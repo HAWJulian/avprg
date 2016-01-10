@@ -1,3 +1,0 @@
-git add <filename> - adds file to commiting stage
-git commit -m "<comment>" - commits added files
-git push - syncs local repository with online repository
