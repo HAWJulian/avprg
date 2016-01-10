@@ -153,6 +153,7 @@ public:
         label_9->setFont(font);
         posSlider = new QSlider(centralWidget);
         posSlider->setObjectName(QStringLiteral("posSlider"));
+        posSlider->setEnabled(true);
         posSlider->setGeometry(QRect(20, 360, 491, 51));
         posSlider->setMinimum(0);
         posSlider->setMaximum(10000);

@@ -280,7 +280,7 @@ void ColorKeyer::setValidValues(std::vector<Point> centers)
     int y = (int) x;
     */
     //qDebug() << centers.size();
-
+    /*
     if(centers.size() != 0)
     {
         qDebug() << "valid values " << centers[0].x << " " << centers[0].y ;
@@ -291,8 +291,90 @@ void ColorKeyer::setValidValues(std::vector<Point> centers)
         int y = (int) x;
         objectasdf->getData(y);
     }
+    */
+    if(centers.size() != 0)
+    {
+        std::vector<int> scaledCenters = scaleValues(centers);
+        objectasdf->getData(scaledCenters);
+        //objectasdf->getData(centers);
+    }
+}
+std::vector<int> ColorKeyer::scaleValues(std::vector<Point> centers)
+{
+    std::vector<int> scaledCenters;
+    float x;
+    int y;
+    float framewidth = 640.;
 
+    //first slider (0-10000)
+    if(centers.size() > 0)
+    {
+        x = (float) centers[0].x;
+        x /= framewidth;
+        x *= 10000;
+        y = (int) x;
+        scaledCenters.push_back(y);
+    }
+    //second slider (10-1000)
 
-    //objectasdf->getData(centers);
+    if(centers.size() > 1)
+    {
+        x = (float)centers[1].x;
+        x /= framewidth;
+        x *= 990;
+        x += 10;
+        y = (int) x;
+        scaledCenters.push_back(y);
+    }
+    //third slider (0-100)
+    if(centers.size() > 2)
+    {
+        x = (float)centers[2].x;
+        x /= framewidth;
+        x *= 100;
+        y = (int)x;
+        scaledCenters.push_back(y);
+    }
+    //fourth slider (0-100)
+    if(centers.size() > 3)
+    {
+        x = (float)centers[3].x;
+        x /= framewidth;
+        x *= 100;
+        y = (int)x;
+        scaledCenters.push_back(y);
+    }
+
+    //fifth slider (0-100)
+    if(centers.size() > 4)
+    {
+        x = (float)centers[4].x;
+        x /= framewidth;
+        x *= 100;
+        y = (int)x;
+        scaledCenters.push_back(y);
+    }
+
+    //sixth slider (0-100)
+    if(centers.size() > 5)
+    {
+        x = (float)centers[5].x;
+        x /= framewidth;
+        x *= 100;
+        y = (int)x;
+        scaledCenters.push_back(y);
+    }
+
+    //seventh slider (1-25)
+    if(centers.size() > 6)
+    {
+        x = (float)centers[5].x;
+        x /= framewidth;
+        x *= 24;
+        x += 1;
+        y = (int)x;
+        scaledCenters.push_back(y);
+    }
+    return scaledCenters;
 }
 

@@ -21,7 +21,7 @@ class asdf : public QMainWindow
 public:
     explicit asdf(QWidget *parent = 0);
     ~asdf();
-    void getData(int y);
+    void getData(std::vector<int> centers);
 private slots:
     // Waveform Mausklick -> Cursor zeichnen
     void mouseRelease(QMouseEvent* event);

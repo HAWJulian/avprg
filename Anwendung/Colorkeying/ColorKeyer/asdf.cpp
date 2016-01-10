@@ -34,10 +34,114 @@ asdf::~asdf()
 {
     delete ui;
 }
-void asdf::getData(int y)
+void asdf::getData(std::vector<int> centers)
 {
+    qDebug() << "centers: " << centers[0] << " "  << centers[1] << " " << centers[2] << " " << centers[3];
+    on_posSlider_valueChanged(centers[0]);
+    ui->posSlider->setValue(centers[0]);
+    if(centers.size() > 1)
+    {
+        on_rateSlider_valueChanged(centers[1]);
+        ui->rateSlider->setValue(centers[1]);
+    }
+    if(centers.size() > 2)
+    {
+        on_dialAttack_valueChanged(centers[2]);
+        ui->dialAttack->setValue(centers[2]);
+    }
+    if(centers.size() > 3)
+    {
+        on_dialHold_valueChanged(centers[3]);
+        ui->dialHold->setValue(centers[3]);
+    }
+    if(centers.size() > 4)
+    {
+        on_dialRelease_valueChanged(centers[4]);
+        ui->dialRelease->setValue(centers[4]);
+    }
+    if(centers.size() > 5)
+    {
+        on_frequencySlider_valueChanged(centers[5]);
+        ui->frequencySlider->setValue(centers[5]);
+    }
+    if(centers.size() > 6)
+    {
+        on_qSlider_valueChanged(centers[6]);
+        ui->qSlider->setValue(centers[6]);
+    }
+    //first slider (0-10000)
+    /*
+    float x = (float)centers[0].x;
+    x /= 480.;
+    x *= 10000;
+    int y = (int) x;
     on_posSlider_valueChanged(y);
     ui->posSlider->setValue(y);
+    */
+    //second slider (10-1000)
+    /*
+    if(centers.size() > 1)
+    {
+        x = (float)centers[1].x;
+        x /= 480.;
+        x *= 990;
+        x += 10;
+        y = (int) x;
+        on_rateSlider_valueChanged(y);
+        ui->rateSlider->setValue(y);
+    }
+    //third slider (0-100)
+    if(centers.size() > 2)
+    {
+        x = (float)centers[2].x;
+        x /= 480.;
+        x *= 100;
+        y = (int)x;
+        on_dialAttack_valueChanged(y);
+        ui->dialAttack->setValue(y);
+    }
+    //fourth slider (0-100)
+    if(centers.size() > 3)
+    {
+        x = (float)centers[3].x;
+        x /= 480.;
+        x *= 100;
+        y = (int)x;
+        on_dialHold_valueChanged(y);
+        ui->dialHold->setValue(y);
+    }
+    //fifth slider (0-100)
+    if(centers.size() > 4)
+    {
+        x = (float)centers[4].x;
+        x /= 480.;
+        x *= 100;
+        y = (int)x;
+        on_dialRelease_valueChanged(y);
+        ui->dialRelease->setValue(y);
+    }
+    //sixth slider (0-100)
+    if(centers.size() > 5)
+    {
+        x = (float)centers[5].x;
+        x /= 480.;
+        x *= 100;
+        y = (int)x;
+        on_frequencySlider_valueChanged(y);
+        ui->frequencySlider->setValue(y);
+    }
+    //seventh slider (1-25)
+    if(centers.size() > 6)
+    {
+        x = (float)centers[5].x;
+        x /= 480.;
+        x *= 24;
+        x += 1;
+        y = (int)x;
+        on_qSlider_valueChanged(y);
+        ui->qSlider->setValue(y);
+    }
+    */
 }
 
 // Audio initialisieren

@@ -40,6 +40,7 @@ private:
     bool setval;
     std::vector<unsigned int> yValues;
     std::vector<cv::Point> sortCenters(std::vector<cv::Point> centers);
+    std::vector<int> scaleValues(std::vector<cv::Point> centers);
     bool checkBorders(std::vector<cv::Point> centers);
     void setValidValues(std::vector<cv::Point> centers);
 signals:

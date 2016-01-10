@@ -46,7 +46,7 @@ void VideoPlayer::on_openVideoFileButton_clicked()
 {
     // Kamera
 
-    videoThread->openCamera(1,0);
+    videoThread->openCamera();
     videoThread->start();
     return;
 

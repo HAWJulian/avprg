@@ -452,6 +452,56 @@ debug\moc_videoplayer.cpp: ..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QMainWi
 		..\videoengine\cvmattoqimage.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
 		..\ColorKeyer\colorkeyer.h \
+		..\ColorKeyer\asdf.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qtmultimediadefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmultimedia.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudio.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodeviceinfo.h \
+		..\ColorKeyer\audioplayer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QIODevice \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioFormat \
+		..\ColorKeyer\audiosource.h \
+		..\ColorKeyer\channelbuffer.h \
+		..\ColorKeyer\audioprocessor.h \
+		..\ColorKeyer\granularsynthesis.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\ColorKeyer\grain.h \
+		..\ColorKeyer\filter.h \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
 		..\ColorKeyer\videoplayer.h
 	D:\qt\5.4\msvc2013\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -ID:/qt/5.4/msvc2013/mkspecs/win32-msvc2013 -ID:/avprgprojekt/Anwendung/Colorkeying/ColorKeyer -ID:/avprgprojekt/Anwendung/Colorkeying/Granularsynthesizer -ID:/avprgprojekt/Anwendung/Colorkeying/audioEngine -ID:/avprgprojekt/Anwendung/Colorkeying/videoengine -I"D:/Program Files (x86)/OpenCV3/opencv/build/include" -ID:/avprgprojekt/Anwendung/Colorkeying/audioEngine -ID:/avprgprojekt/Anwendung/Colorkeying/Granularsynthesizer -ID:/avprgprojekt/Anwendung/Colorkeying/audioengine -ID:/qt/5.4/msvc2013/include -ID:/qt/5.4/msvc2013/include/QtPrintSupport -ID:/qt/5.4/msvc2013/include/QtWidgets -ID:/qt/5.4/msvc2013/include/QtMultimedia -ID:/qt/5.4/msvc2013/include/QtGui -ID:/qt/5.4/msvc2013/include/QtANGLE -ID:/qt/5.4/msvc2013/include/QtNetwork -ID:/qt/5.4/msvc2013/include/QtCore -I. ..\ColorKeyer\videoplayer.h -o debug\moc_videoplayer.cpp
 
@@ -560,6 +610,108 @@ debug\moc_asdf.cpp: ..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QMainWindow \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtouchdevice.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qtabwidget.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qicon.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qtmultimediadefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmultimedia.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudio.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodeviceinfo.h \
+		..\ColorKeyer\audioplayer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QIODevice \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioFormat \
+		..\ColorKeyer\audiosource.h \
+		..\ColorKeyer\channelbuffer.h \
+		..\ColorKeyer\audioprocessor.h \
+		..\ColorKeyer\granularsynthesis.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\ColorKeyer\grain.h \
+		..\ColorKeyer\filter.h \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDebug \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
+		..\videoengine\cvmattoqimage.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QImage \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\opencv.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvdef.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\hal\defs.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\version.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\base.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvstd.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\ptr.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\hal.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\sse_utils.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\traits.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\matx.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\types.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\mat.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\bufferpool.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\mat.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\persistence.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\operations.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvstd.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\utility.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\core_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\types_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\optim.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc\imgproc_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc\types_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\photo.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\photo\photo_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\tracking.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\background_segm.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\tracking_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\features2d.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\miniflann.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\defines.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\config.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect\detection_based_tracker.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect\objdetect_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\calib3d.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\affine.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\calib3d\calib3d_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgcodecs.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\videoio.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\highgui.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\highgui\highgui_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgcodecs\imgcodecs_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\videoio\videoio_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\ml.hpp" \
 		..\ColorKeyer\asdf.h
 	D:\qt\5.4\msvc2013\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -ID:/qt/5.4/msvc2013/mkspecs/win32-msvc2013 -ID:/avprgprojekt/Anwendung/Colorkeying/ColorKeyer -ID:/avprgprojekt/Anwendung/Colorkeying/Granularsynthesizer -ID:/avprgprojekt/Anwendung/Colorkeying/audioEngine -ID:/avprgprojekt/Anwendung/Colorkeying/videoengine -I"D:/Program Files (x86)/OpenCV3/opencv/build/include" -ID:/avprgprojekt/Anwendung/Colorkeying/audioEngine -ID:/avprgprojekt/Anwendung/Colorkeying/Granularsynthesizer -ID:/avprgprojekt/Anwendung/Colorkeying/audioengine -ID:/qt/5.4/msvc2013/include -ID:/qt/5.4/msvc2013/include/QtPrintSupport -ID:/qt/5.4/msvc2013/include/QtWidgets -ID:/qt/5.4/msvc2013/include/QtMultimedia -ID:/qt/5.4/msvc2013/include/QtGui -ID:/qt/5.4/msvc2013/include/QtANGLE -ID:/qt/5.4/msvc2013/include/QtNetwork -ID:/qt/5.4/msvc2013/include/QtCore -I. ..\ColorKeyer\asdf.h -o debug\moc_asdf.cpp
 
@@ -1299,7 +1451,142 @@ ui_videoplayer.h: ..\ColorKeyer\videoplayer.ui \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QImage
 	D:\qt\5.4\msvc2013\bin\uic.exe ..\ColorKeyer\videoplayer.ui -o ui_videoplayer.h
 
-ui_asdf.h: ..\ColorKeyer\asdf.ui
+ui_asdf.h: ..\ColorKeyer\asdf.ui \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qobject.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qobjectdefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qnamespace.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qconfig.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfeatures.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsystemdetection.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qprocessordetection.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcompilerdetection.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qtypeinfo.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qtypetraits.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsysinfo.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qlogging.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qflags.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qbasicatomic.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_bootstrap.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qgenericatomic.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_msvc.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_armv7.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_armv6.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_armv5.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_ia64.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_mips.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_x86.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_cxx11.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_gcc.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qatomic_unix.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qglobalstatic.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmutex.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qnumeric.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstring.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qchar.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qbytearray.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qrefcount.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qarraydata.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstringbuilder.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qlist.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qalgorithms.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qiterator.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qbytearraylist.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcoreevent.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qscopedpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmetatype.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qvarlengtharray.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcontainerfwd.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qisenum.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qobject_impl.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsharedpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qshareddata.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qhash.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpair.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qwidget.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qwindowdefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qwindowdefs_win.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmargins.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qrect.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpoint.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpalette.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qcolor.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qrgb.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstringlist.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatastream.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qiodevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qregexp.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstringmatcher.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qbrush.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qvector.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qmatrix.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpolygon.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qregion.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qline.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtransform.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainterpath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qimage.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpixelformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpixmap.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfont.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfontmetrics.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfontinfo.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qsizepolicy.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qcursor.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qkeysequence.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qevent.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qvariant.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmap.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdebug.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qtextstream.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qlocale.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qset.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcontiguouscache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qurl.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qurlquery.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfile.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfiledevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qvector2d.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtouchdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDebug \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h
 	D:\qt\5.4\msvc2013\bin\uic.exe ..\ColorKeyer\asdf.ui -o ui_asdf.h
 
 ui_mainwindow.h: ..\Granularsynthesizer\mainwindow.ui \
@@ -1618,14 +1905,7 @@ debug\main.obj: ..\ColorKeyer\main.cpp ..\ColorKeyer\videoplayer.h \
 		..\videoengine\cvmattoqimage.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
 		..\ColorKeyer\colorkeyer.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QApplication \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcoreapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qeventloop.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qdesktopwidget.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qguiapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qinputmethod.h \
-		..\ColorKeyer\mainwindow.h \
+		..\ColorKeyer\asdf.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
 		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
 		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
@@ -1675,7 +1955,14 @@ debug\main.obj: ..\ColorKeyer\main.cpp ..\ColorKeyer\videoplayer.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
-		..\ColorKeyer\asdf.h
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QApplication \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcoreapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qeventloop.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qguiapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qinputmethod.h \
+		..\ColorKeyer\mainwindow.h
 
 debug\videoplayer.obj: ..\ColorKeyer\videoplayer.cpp ..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QFileDialog \
 		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qfiledialog.h \
@@ -1848,6 +2135,56 @@ debug\videoplayer.obj: ..\ColorKeyer\videoplayer.cpp ..\..\..\..\qt\5.4\msvc2013
 		..\videoengine\cvmattoqimage.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
 		..\ColorKeyer\colorkeyer.h \
+		..\ColorKeyer\asdf.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qtmultimediadefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmultimedia.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudio.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodeviceinfo.h \
+		..\ColorKeyer\audioplayer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QIODevice \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioFormat \
+		..\ColorKeyer\audiosource.h \
+		..\ColorKeyer\channelbuffer.h \
+		..\ColorKeyer\audioprocessor.h \
+		..\ColorKeyer\granularsynthesis.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\ColorKeyer\grain.h \
+		..\ColorKeyer\filter.h \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
 		ui_videoplayer.h
 
 debug\colorkeyer.obj: ..\ColorKeyer\colorkeyer.cpp ..\ColorKeyer\colorkeyer.h \
@@ -1990,7 +2327,77 @@ debug\colorkeyer.obj: ..\ColorKeyer\colorkeyer.cpp ..\ColorKeyer\colorkeyer.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpixmap.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qcolor.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsharedpointer.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsharedpointer_impl.h
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qsharedpointer_impl.h \
+		..\ColorKeyer\asdf.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QMainWindow \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qmainwindow.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qwidget.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpalette.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qbrush.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfont.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfontmetrics.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qfontinfo.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qsizepolicy.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qcursor.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qkeysequence.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qevent.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qurl.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qurlquery.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfile.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfiledevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qvector2d.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtouchdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qtabwidget.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qicon.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qtmultimediadefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmultimedia.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudio.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodeviceinfo.h \
+		..\ColorKeyer\audioplayer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QIODevice \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioFormat \
+		..\ColorKeyer\audiosource.h \
+		..\ColorKeyer\channelbuffer.h \
+		..\ColorKeyer\audioprocessor.h \
+		..\ColorKeyer\granularsynthesis.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\ColorKeyer\grain.h \
+		..\ColorKeyer\filter.h \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h
 
 debug\asdf.obj: ..\ColorKeyer\asdf.cpp ..\ColorKeyer\asdf.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QMainWindow \
@@ -2098,7 +2505,122 @@ debug\asdf.obj: ..\ColorKeyer\asdf.cpp ..\ColorKeyer\asdf.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtouchdevice.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qtabwidget.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qicon.h \
-		ui_asdf.h
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qtmultimediadefs.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmultimedia.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudio.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioformat.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodeviceinfo.h \
+		..\ColorKeyer\audioplayer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QIODevice \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioFormat \
+		..\ColorKeyer\audiosource.h \
+		..\ColorKeyer\channelbuffer.h \
+		..\ColorKeyer\audioprocessor.h \
+		..\ColorKeyer\granularsynthesis.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QVector \
+		..\ColorKeyer\grain.h \
+		..\ColorKeyer\filter.h \
+		..\ColorKeyer\qcustomplot\qcustomplot.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QObject \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QPointer \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qpointer.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QWidget \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPainter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpainter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qtextoption.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpen.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPaintEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QMouseEvent \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QString \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDateTime \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdatetime.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMultiMap \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFlags \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QDebug \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QVector2D \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QStack \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qstack.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QCache \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcache.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QMargins \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmath.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrinter \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprinter.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagedpaintdevice.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagelayout.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qpagesize.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
+		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
+		..\videoengine\cvmattoqimage.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QImage \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\opencv.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvdef.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\hal\defs.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\version.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\base.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvstd.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\ptr.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\hal.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\sse_utils.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\traits.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\matx.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\types.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\mat.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\bufferpool.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\mat.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\persistence.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\operations.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\cvstd.inl.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\utility.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\core_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\types_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\optim.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc\imgproc_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgproc\types_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\photo.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\photo\photo_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\tracking.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\background_segm.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\video\tracking_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\features2d.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\miniflann.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\defines.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\flann\config.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect\detection_based_tracker.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\objdetect\objdetect_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\calib3d.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core\affine.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\calib3d\calib3d_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgcodecs.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\videoio.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\highgui.hpp" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\highgui\highgui_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\imgcodecs\imgcodecs_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\videoio\videoio_c.h" \
+		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\ml.hpp" \
+		ui_asdf.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QFileDialog \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qfiledialog.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qdir.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qfileinfo.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qdialog.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioInput \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudioinput.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioDecoder \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiodecoder.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmediaobject.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qmediaenumdebug.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qmetaobject.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiobuffer.h
 
 debug\videoengine.obj: ..\videoengine\videoengine.cpp "..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\opencv.hpp" \
 		"..\..\..\..\Program Files (x86)\OpenCV3\opencv\build\include\opencv2\core.hpp" \
@@ -2643,14 +3165,7 @@ debug\main.obj: ..\ColorKeyer\main.cpp ..\ColorKeyer\videoplayer.h \
 		..\videoengine\cvmattoqimage.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtGui\QPixmap \
 		..\ColorKeyer\colorkeyer.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QApplication \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcoreapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qeventloop.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qdesktopwidget.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qguiapplication.h \
-		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qinputmethod.h \
-		..\ColorKeyer\mainwindow.h \
+		..\ColorKeyer\asdf.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtCore\QFile \
 		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\QAudioOutput \
 		..\..\..\..\qt\5.4\msvc2013\include\QtMultimedia\qaudiooutput.h \
@@ -2700,7 +3215,14 @@ debug\main.obj: ..\ColorKeyer\main.cpp ..\ColorKeyer\videoplayer.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qtprintsupportglobal.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\QPrintEngine \
 		..\..\..\..\qt\5.4\msvc2013\include\QtPrintSupport\qprintengine.h \
-		..\ColorKeyer\asdf.h
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QApplication \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qcoreapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtCore\qeventloop.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qguiapplication.h \
+		..\..\..\..\qt\5.4\msvc2013\include\QtGui\qinputmethod.h \
+		..\ColorKeyer\mainwindow.h
 
 debug\mainwindow.obj: ..\ColorKeyer\mainwindow.cpp ..\ColorKeyer\mainwindow.h \
 		..\..\..\..\qt\5.4\msvc2013\include\QtWidgets\QMainWindow \

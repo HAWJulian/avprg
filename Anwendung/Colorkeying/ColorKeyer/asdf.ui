@@ -286,6 +286,9 @@
     </property>
    </widget>
    <widget class="QSlider" name="posSlider">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
